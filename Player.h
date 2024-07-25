@@ -1,8 +1,10 @@
+#pragma once
+
 #include <string>
 
 class Player {
  
- private:
+ protected:
   std::string name;
   char currentMove;
 
@@ -11,9 +13,12 @@ class Player {
 
   Player(std::string name);
 
+  void setName(std::string name);
+
   virtual char makeMove() = 0;
 
   char getMove();
 
   std::string getName();
+  
 };

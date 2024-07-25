@@ -4,8 +4,8 @@ Referee::Referee() {}
 
 Player* Referee::refGame(Player* player1, Player* player2) {
 
-  char player1Move = player1->getMove();
-  char player2Move = player2->getMove();
+  char player1Move = player1->makeMove();
+  char player2Move = player2->makeMove();
 
   // Player 1 move is rock
   if (player1Move == 'R') {
@@ -29,7 +29,7 @@ Player* Referee::refGame(Player* player1, Player* player2) {
     }
   }
 
-  // Player 2 move is scissors
+  // Player 1 move is scissors
   if (player1Move == 'S') {
     if (player2Move == 'R') {
       return player2;
@@ -40,6 +40,6 @@ Player* Referee::refGame(Player* player1, Player* player2) {
     }
   }
   
-
+  return nullptr;
 }
 

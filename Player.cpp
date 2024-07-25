@@ -1,6 +1,6 @@
 #include "Player.h"
 
-Player::Player() : name("default"), currentMove('N') {}
+Player::Player() : name("Human"), currentMove('N') {}
 
 Player::Player(std::string name) : name(name), currentMove('N') {}
 
@@ -10,4 +10,8 @@ char Player::getMove() {
 
 std::string Player::getName() {
   return name;
+}
+
+void Player::setName(std::string name) {
+  this->name = name;
 }
