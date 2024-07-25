@@ -1,8 +1,8 @@
 #include "Player.h"
 
-Player::Player() : name("Human"), currentMove('N') {}
+Player::Player() : name("Human"), currentMove('R') {}
 
-Player::Player(std::string name) : name(name), currentMove('N') {}
+Player::Player(std::string name) : name(name), currentMove('R') {}
 
 char Player::getMove() {
   return currentMove;

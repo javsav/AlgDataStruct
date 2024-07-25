@@ -9,10 +9,11 @@ class Player {
   char currentMove;
 
  public:
+
   Player();
 
   Player(std::string name);
-
+  
   void setName(std::string name);
 
   virtual char makeMove() = 0;
@@ -20,5 +21,5 @@ class Player {
   char getMove();
 
   std::string getName();
-  
+
 };

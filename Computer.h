@@ -5,13 +5,9 @@
 
 class Computer: public Player {
 
-  private:
-
-  char currentMove = 'R';
-  std::string name = "Computer";
-
   public:
 
+  Computer();
   char makeMove();
 
 };
