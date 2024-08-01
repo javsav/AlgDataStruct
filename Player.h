@@ -1,12 +1,14 @@
 #pragma once
-
+#include "Move.h"
 #include <string>
+#include <unordered_map>
 
 class Player {
  
  protected:
   std::string name;
-  char currentMove;
+  std::string currentMove;
+  std::unordered_map<std::string, Move*> moves;
 
  public:
 
@@ -16,9 +18,7 @@ class Player {
   
   void setName(std::string name);
 
-  virtual char makeMove() = 0;
-
-  char getMove();
+  virtual Move* makeMove() = 0;  
 
   std::string getName();
 

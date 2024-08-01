@@ -7,7 +7,9 @@ class Human: public Player {
 
   public:  
 
-  char makeMove();
+  using Player::Player;
+
+  Move* makeMove();
 
 
 };

@@ -1,13 +1,14 @@
 #include "Human.h"
+#include "Rock.h"
 
-char Human::makeMove() {
+Move* Human::makeMove() {
   std::cout << "\nEnter move:";
   std::cin >> currentMove;
   std::cout << "\n";
-  if (currentMove != 'R' && currentMove != 'P' && currentMove != 'S') {
-    std::cout << "Invalid move. Setting move to rock.\n";
-    currentMove = 'R';
+  if (moves.count(currentMove)) {
+    return moves[currentMove];
+  } else {
+    std::cout << "Invalid move. Playing Rock.\n";
+    return new Rock;
   }
-  
-  return currentMove;
 }

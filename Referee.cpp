@@ -4,42 +4,17 @@ Referee::Referee() {}
 
 Player* Referee::refGame(Player* player1, Player* player2) {
 
-  char player1Move = player1->makeMove();
-  char player2Move = player2->makeMove();
+  Move* player1Move = player1->makeMove();
+  Move* player2Move = player2->makeMove();
 
-  // Player 1 move is rock
-  if (player1Move == 'R') {
-    if (player2Move == 'R') {
-      return nullptr;
-    } else if (player2Move == 'P') {
-      return player2;
-    } else if (player2Move == 'S') {
-      return player1;
-    }
-  }
-
-  // Player 1 move is paper
-  if (player1Move == 'P') {
-    if (player2Move == 'R') {
-      return player1;
-    } else if (player2Move == 'P') {
-      return nullptr;
-    } else if (player2Move == 'S') {
-      return player2;
-    }
-  }
-
-  // Player 1 move is scissors
-  if (player1Move == 'S') {
-    if (player2Move == 'R') {
-      return player2;
-    } else if (player2Move == 'P') {
-      return player1;
-    } else if (player2Move == 'S') {
-      return nullptr;
-    }
+  if (player1Move->checkWin(player2Move) == 'W') {
+    return player1;
+  } else if (player1Move->checkWin(player2Move) == 'L') {
+    return player2;
+  } else {
+    return nullptr;
   }
   
-  return nullptr;
+  
 }
 

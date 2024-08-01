@@ -58,13 +58,13 @@ int main() {
     Player* round = referee.refGame(p1, p2);
 
     if (round == p1) {
-      std::cout << p1->getName() << " Wins\n\n";
+      std::cout << "\n" << p1->getName() << " Wins\n\n";
       p1Score ++;
     } else if (round == p2) {
       std::cout << p2->getName() << " Wins\n\n";
       p2Score ++;
     } else {
-      std::cout << "It's a Tie\n\n";
+      std::cout << "\n" << "\nIt's a Tie\n\n";
     }
 
     std::cout << "Player 1 score: " << p1Score << "\n";
