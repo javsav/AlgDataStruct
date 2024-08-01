@@ -18,6 +18,7 @@ class Player {
   void setName(std::string name);
   virtual Move* makeMove() = 0;
   std::string getName();
+  ~Player();
 };
 
 #endif  // PLAYER_H
