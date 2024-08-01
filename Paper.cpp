@@ -1,5 +1,3 @@
 #include "Paper.h"
 
-Paper::Paper() : Move("Paper") {
-    wins = {"Rock"};
-}
+Paper::Paper() : Move("Paper", {"Rock"}) {}

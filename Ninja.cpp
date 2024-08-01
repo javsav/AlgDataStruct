@@ -1,5 +1,3 @@
 #include "Ninja.h"
 
-Ninja::Ninja() : Move("Ninja") {
-  wins = {"Pirate", "Zombie"};
-}
+Ninja::Ninja() : Move("Ninja", {"Pirate", "Zombie"}) {}

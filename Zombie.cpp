@@ -1,5 +1,3 @@
 #include "Zombie.h"
 
-Zombie::Zombie() : Move("Zombie") {
-  wins = {"Monkey", "Pirate"};
-}
+Zombie::Zombie() : Move("Zombie", {"Monkey", "Pirate"}) {}

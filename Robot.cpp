@@ -1,5 +1,3 @@
 #include "Robot.h"
 
-Robot::Robot() : Move("Robot") {
-  wins = {"Ninja", "Zombie"};
-}
+Robot::Robot() : Move("Robot", {"Ninja", "Zombie"}) {}

@@ -1,5 +1,3 @@
 #include "Pirate.h"
 
-Pirate::Pirate() : Move("Pirate") {
-  wins = {"Monkey", "Robot"};
-}
+Pirate::Pirate() : Move("Pirate", {"Monkey", "Robot"}) {}
