@@ -1,7 +1,5 @@
 #include "Move.h"
 
-#include "Rock.h"
-
 // Parameterised constructor allows easy move setup //
 Move::Move(std::string move, std::initializer_list<std::string> wins)
     : name(move), winsAgainst(wins) {}
