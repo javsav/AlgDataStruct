@@ -1,14 +1,15 @@
-#pragma once
+#ifndef HUMAN_H
+#define HUMAN_H
 
-#include "Player.h"
 #include <iostream>
 
-class Human: public Player {
+#include "Player.h"
 
-  public:
-
+class Human : public Player {
+ public:
   // Inherit constructors //
   using Player::Player;
   Move* makeMove();
-
 };
+
+#endif  // HUMAN_H

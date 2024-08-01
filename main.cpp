@@ -1,10 +1,9 @@
-#include "Player.h"
-#include "Human.h"
-#include "Referee.h"
 #include "Computer.h"
+#include "Human.h"
+#include "Player.h"
+#include "Referee.h"
 
 int main() {
-
   std::cout << "Rock Paper Scissors\n";
 
   std::cout << "1. Player vs Player (PVP)\n";
@@ -37,7 +36,7 @@ int main() {
   }
 
   // Player 1 is always Human //
-  Player* p1 = &player1;  
+  Player* p1 = &player1;
   Player* p2;
   // Player 2 pointer can point to Human or Computer //
   if (versus == 1) {
@@ -56,23 +55,20 @@ int main() {
   int p2Score = 0;
 
   while (currentRound < numRounds) {
-    
     Player* round = referee.refGame(p1, p2);
 
     if (round == p1) {
       std::cout << "\n" << p1->getName() << " Wins\n\n";
-      p1Score ++;
+      p1Score++;
     } else if (round == p2) {
       std::cout << p2->getName() << " Wins\n\n";
-      p2Score ++;
+      p2Score++;
     } else {
       std::cout << "\n" << "\nIt's a Tie\n\n";
     }
 
     std::cout << "Player 1 score: " << p1Score << "\n";
     std::cout << "Player 2 score: " << p2Score << "\n";
-    currentRound ++;
+    currentRound++;
   }
-
-
 }

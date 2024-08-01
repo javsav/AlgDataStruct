@@ -1,13 +1,14 @@
-#pragma once
+#ifndef COMPUTER_H
+#define COMPUTER_H
 
-#include "Player.h"
 #include <string>
 
-class Computer: public Player {
+#include "Player.h"
 
-  public:
-  
+class Computer : public Player {
+ public:
   Computer();
   Move* makeMove();
-
 };
+
+#endif // COMPUTER_H

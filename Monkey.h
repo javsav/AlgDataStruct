@@ -1,13 +1,14 @@
-#pragma once
+#ifndef MONKEY_H
+#define MONKEY_H
+
+#include <string>
+#include <unordered_map>
 
 #include "Move.h"
-#include <unordered_map>
-#include <string>
 
-class Monkey:public Move {
-
-  public:
-
+class Monkey : public Move {
+ public:
   Monkey();
-
 };
+
+#endif  // MONKEY_H

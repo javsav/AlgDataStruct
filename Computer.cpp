@@ -1,15 +1,16 @@
 #include "Computer.h"
-#include <iostream>
-#include <time.h>
+
 #include <stdlib.h>
+#include <time.h>
+
+#include <iostream>
 
 Computer::Computer() : Player("Computer") {
   // Set random seed to system time //
-  srand(time(NULL)); 
+  srand(time(NULL));
 }
 
 Move* Computer::makeMove() {
-  
   // Random move selection //
 
   /*int r = rand() % moves.size();

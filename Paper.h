@@ -1,13 +1,14 @@
-#pragma once
+#ifndef PAPER_H
+#define PAPER_H
+
+#include <string>
+#include <unordered_map>
 
 #include "Move.h"
-#include <unordered_map>
-#include <string>
 
-class Paper:public Move {
-
-  public:
-
+class Paper : public Move {
+ public:
   Paper();
-
 };
+
+#endif  // PAPER_H

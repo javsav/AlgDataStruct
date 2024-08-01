@@ -1,13 +1,14 @@
-#pragma once
+#ifndef ROCK_H
+#define ROCK_H
+
+#include <string>
+#include <unordered_map>
 
 #include "Move.h"
-#include <unordered_map>
-#include <string>
 
-class Rock:public Move {
-
-  public:
-
+class Rock : public Move {
+ public:
   Rock();
-
 };
+
+#endif  // ROCK_H

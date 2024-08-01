@@ -1,13 +1,14 @@
-#pragma once
+#ifndef ROBOT_H
+#define ROBOT_H
+
+#include <string>
+#include <unordered_map>
 
 #include "Move.h"
-#include <unordered_map>
-#include <string>
 
-class Robot:public Move {
-
-  public:
-
+class Robot : public Move {
+ public:
   Robot();
-
 };
+
+#endif  // ROBOT_H

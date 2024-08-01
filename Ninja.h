@@ -1,13 +1,14 @@
-#pragma once
+#ifndef NINJA_H
+#define NINJA_H
+
+#include <string>
+#include <unordered_map>
 
 #include "Move.h"
-#include <unordered_map>
-#include <string>
 
-class Ninja:public Move {
-
-  public:
-
+class Ninja : public Move {
+ public:
   Ninja();
-
 };
+
+#endif  // NINJA_H
