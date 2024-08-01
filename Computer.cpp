@@ -13,4 +13,6 @@ Move* Computer::makeMove() {
   std::advance(it, r);
   std::cout << "Computer plays " << it->second->getName() << ".\n";
   return it->second;
+
+  //return moves["Rock"];
 }
