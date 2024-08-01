@@ -22,9 +22,21 @@ void Player::setName(std::string name) {
 
 Player::~Player() {
   // Delete dynamically allocated moves //
+  /*delete moves["Rock"];
+  delete moves["Paper"];
+  delete moves["Scissors"];*/
+
+  /*delete moves["Monkey"];
+  delete moves["Robot"];
+  delete moves["Zombie"];
+  delete moves["Ninja"];
+  delete moves["Pirate"];*/
+  
   for (auto i = moves.begin(); i != moves.end(); ++i) {
     delete i->second;
   }
+
+  moves.clear();
 }
 
 // Player-entered string is used as a key for the hashmap to return specific move //
