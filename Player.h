@@ -11,12 +11,12 @@ class Player {
   std::string name;
   // Hash map of move names to objects //
   static std::unordered_map<std::string, Move*> moves;
+  virtual Move* makeMove() = 0;
 
  public:
   Player();
   Player(std::string name);
-  void setName(std::string name);
-  virtual Move* makeMove() = 0;
+  void setName(std::string name);  
   std::string getName();
   ~Player();
 };
