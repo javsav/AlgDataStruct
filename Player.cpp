@@ -8,27 +8,9 @@
 #include "Ninja.h"
 #include "Pirate.h"
 
-Player::Player() : name("Human"), currentMove("Rock") {
-  moves["Rock"] = new Rock;
-  moves["Paper"] = new Paper;
-  moves["Scissors"] = new Scissors;
-  moves["Monkey"] = new Monkey;
-  moves["Robot"] = new Robot;
-  moves["Zombie"] = new Zombie;
-  moves["Ninja"] = new Ninja;
-  moves["Pirate"] = new Pirate;
-}
+Player::Player() : name("Human") {}
 
-Player::Player(std::string name) : name(name), currentMove("Rock") {
-  moves["Rock"] = new Rock;
-  moves["Paper"] = new Paper;
-  moves["Scissors"] = new Scissors;
-  moves["Monkey"] = new Monkey;
-  moves["Robot"] = new Robot;
-  moves["Zombie"] = new Zombie;
-  moves["Ninja"] = new Ninja;
-  moves["Pirate"] = new Pirate;
-}
+Player::Player(std::string name) : name(name) {}
 
 std::string Player::getName() {
   return name;
@@ -37,3 +19,16 @@ std::string Player::getName() {
 void Player::setName(std::string name) {
   this->name = name;
 }
+
+// Player-entered string is used as a key for the hashmap to return specific move //
+std::unordered_map<std::string, Move*> Player::moves = {
+  {"Rock", new Rock},
+  {"Paper", new Paper},
+  {"Scissors", new Scissors},
+
+  {"Monkey", new Monkey},
+  {"Robot", new Robot},
+  {"Zombie", new Zombie},
+  {"Ninja", new Ninja},
+  {"Pirate", new Pirate}
+};

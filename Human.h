@@ -5,11 +5,10 @@
 
 class Human: public Player {
 
-  public:  
+  public:
 
+  // Inherit constructors //
   using Player::Player;
-
   Move* makeMove();
-
 
 };

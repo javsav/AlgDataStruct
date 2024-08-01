@@ -16,6 +16,7 @@ int main() {
 
   std::string name1;
   std::string name2;
+  // Create players on the stack //
   Human player1;
   Human player2;
   Computer computer;
@@ -35,9 +36,10 @@ int main() {
     player1.setName(name1);
   }
 
-  Player* p1 = &player1;
+  // Player 1 is always Human //
+  Player* p1 = &player1;  
   Player* p2;
-
+  // Player 2 pointer can point to Human or Computer //
   if (versus == 1) {
     p2 = &player2;
   } else {

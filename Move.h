@@ -9,6 +9,7 @@ class Move {
   protected:
   
   std::string name;
+  // List of moves that the move wins against //
   std::unordered_set<std::string> wins;
   
   public:
