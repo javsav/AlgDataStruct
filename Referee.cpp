@@ -8,13 +8,13 @@ Player* Referee::refGame(Player* player1, Player* player2) {
   Move* player2Move = player2->makeMove();
 
   // Return tie for incompatible moves
-  if (player1Move->checkWin(player2Move) == player2Move && player2Move->checkWin(player1Move) == player1Move) {
+  if (player1Move->checkWinner(player2Move) == player2Move && player2Move->checkWinner(player1Move) == player1Move) {
     return nullptr;
   }
   
-  if (player1Move->checkWin(player2Move) == player1Move) {
+  if (player1Move->checkWinner(player2Move) == player1Move) {
     return player1;
-  } else if (player1Move->checkWin(player2Move) == player2Move) {
+  } else if (player1Move->checkWinner(player2Move) == player2Move) {
     return player2;
   } else {
     return nullptr;
