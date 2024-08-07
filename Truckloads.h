@@ -1,9 +1,8 @@
 
-
 class Truckloads {
 
   public:
 
-  int numTrucks(int numCrates, int loadSize);
+  static int numTrucks(int numCrates, int loadSize);
 
 };
