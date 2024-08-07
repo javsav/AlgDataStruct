@@ -1,31 +1,22 @@
 #include "Truckloads.h"
 #include <iostream>
 
-namespace Test {
-  auto Trucks = Truckloads::numTrucks(numCrates, loadSize);
-}
+namespace UnitTest {  
 
-class UnitTest {
-  
-  public:
-
-  class TruckloadsTests {
-
-    private:
-
+  namespace TruckloadsTests {    
+    
     int numCrates;
     int loadSize;
-    
-    public:
-    
-    bool TestOne() {
+    auto LoadTest = Truckloads::numTrucks(numCrates, loadSize);    
+   
+    bool testOne() {
 
       numCrates = 24;
       loadSize = 3;
       
-      std::cout << Test::Trucks << "\n";
+      std::cout << LoadTest << "\n";
 
-      return Test::Trucks == numCrates/loadSize;      
+      return LoadTest == numCrates/loadSize;      
 
     }
 
@@ -33,3 +24,9 @@ class UnitTest {
   };
 
 };
+
+int main() {
+
+  std::cout << UnitTest::TruckloadsTests::testOne() << "\n";
+
+}
