@@ -84,6 +84,67 @@ namespace UnitTest {
 
   }
 
+  namespace ReverseStringTests {
+
+    int digits;
+
+    bool testOne() {
+
+      std::string str = "HowDoYouDo";
+      
+      std::cout << "String in reverse: " << Reverser::reverseString(str) << ".\n";
+      std::string revStr = str;
+      std::reverse(revStr.begin(), revStr.end());
+      return Reverser::reverseString(str) == revStr;
+
+    }
+
+    bool testTwo() {
+
+      std::string str = "RaCeCaR";
+      
+      std::cout << "String in reverse: " << Reverser::reverseString(str) << ".\n";
+      std::string revStr = str;
+      std::reverse(revStr.begin(), revStr.end());
+      return Reverser::reverseString(str) == revStr;
+
+    }
+
+    bool testThree() {
+
+      std::string str = "Evian";
+      
+      std::cout << "String in reverse: " << Reverser::reverseString(str) << ".\n";
+      std::string revStr = str;
+      std::reverse(revStr.begin(), revStr.end());
+      return Reverser::reverseString(str) == revStr;
+
+    }
+
+    bool testFour() {
+
+      std::string str = "X";
+      
+      std::cout << "String in reverse: " << Reverser::reverseString(str) << ".\n";
+      std::string revStr = str;
+      std::reverse(revStr.begin(), revStr.end());
+      return Reverser::reverseString(str) == revStr;
+
+    }
+
+    bool testFive() {
+
+      std::string str = "Spacey    J A N E";
+      
+      std::cout << "String in reverse: " << Reverser::reverseString(str) << ".\n";
+      std::string revStr = str;
+      std::reverse(revStr.begin(), revStr.end());
+      return Reverser::reverseString(str) == revStr;
+
+    }
+
+  }
+
   namespace TruckloadsTests {    
     
     int numCrates;
@@ -185,6 +246,16 @@ int main() {
   runTest(ReverseDigitTests::testFour);
 
   runTest(ReverseDigitTests::testFive);
+
+  runTest(ReverseStringTests::testOne);
+
+  runTest(ReverseStringTests::testTwo);
+
+  runTest(ReverseStringTests::testThree);
+
+  runTest(ReverseStringTests::testFour);
+
+  runTest(ReverseStringTests::testFive);
 
 
 }
