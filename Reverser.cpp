@@ -19,24 +19,22 @@ std::string Reverser::reverseString(std::string characters) {
 
 int Reverser::reverseDigit(int value) {
 
-  //Calculate number of digits in current value
-  int numDigits = 0;
+  // Calculate number of digits in current value
+  int powTen = 0;
   int tempValue = value;
-  // Repeatedly divide by 10 until number == 0
-  do {
+  // Repeatedly divide by 10 while number >= 10
+  while (tempValue >= 10); {
     tempValue /= 10;
-    numDigits++;
-    std::cout << "Value: " << tempValue << " Actual value: " << value << " Num Digits: " << numDigits << "\n";
-  } while (tempValue >= 10);
+    powTen++;
+  }
 
-  std::cout << "Numdigits before next call: " << numDigits << " Value before next call: " << value << "\n";
 
-  // Base case: value has two digits.
+  // Base case: value has two or less digits.
   if (value/10 < 10) {
     return ((value % 10) * 10) + (value / 10);
   }
 
-  // Modulo 10 returns the final digit, multiply by the number of digits and continue recursively
-  return ((value % 10) * pow(10, numDigits) + reverseDigit(value/10));
+  // Modulo 10 returns the final digit, multiply by the number of digits - 1 and continue recursively
+  return ((value % 10) * pow(10, powTen) + reverseDigit(value/10));
 }
 
