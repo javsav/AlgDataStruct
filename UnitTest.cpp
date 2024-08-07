@@ -1,6 +1,7 @@
 #include "Truckloads.h"
 #include "Reverser.h"
 #include <iostream>
+#include <algorithm>
 
 namespace UnitTest {
 
@@ -15,9 +16,9 @@ namespace UnitTest {
     test();
 
     if (function()) {
-      std::cout << "Test Passed.\n";
+      std::cout << "Test Passed.\n\n";
     } else {
-      std::cout << "Test Failed.\n";
+      std::cout << "Test Failed.\n\n";
     }
 
   }
@@ -31,8 +32,53 @@ namespace UnitTest {
       digits = 1337;
       
       std::cout << "Digits in reverse: " << Reverser::reverseDigit(digits) << ".\n";
+      std::string digit = std::to_string(digits);
+      std::reverse(digit.begin(), digit.end());
+      return Reverser::reverseDigit(digits) == stoi(digit);
 
-      return Reverser::reverseDigit(digits) == 7331;
+    }
+
+    bool testTwo() {
+
+      digits = 0;
+      
+      std::cout << "Digits in reverse: " << Reverser::reverseDigit(digits) << ".\n";
+      std::string digit = std::to_string(digits);
+      std::reverse(digit.begin(), digit.end());
+      return Reverser::reverseDigit(digits) == stoi(digit);
+
+    }
+
+    bool testThree() {
+
+      digits = 10;
+      
+      std::cout << "Digits in reverse: " << Reverser::reverseDigit(digits) << ".\n";
+      std::string digit = std::to_string(digits);
+      std::reverse(digit.begin(), digit.end());
+      return Reverser::reverseDigit(digits) == stoi(digit);
+
+    }
+
+    bool testFour() {
+
+      digits = 999979979;
+      
+      std::cout << "Digits in reverse: " << Reverser::reverseDigit(digits) << ".\n";
+      std::string digit = std::to_string(digits);
+      std::reverse(digit.begin(), digit.end());
+      return Reverser::reverseDigit(digits) == stoi(digit);
+
+    }
+
+    bool testFive() {
+
+      digits = 123456789;
+      
+      std::cout << "Digits in reverse: " << Reverser::reverseDigit(digits) << ".\n";
+      std::string digit = std::to_string(digits);
+      std::reverse(digit.begin(), digit.end());
+      return Reverser::reverseDigit(digits) == stoi(digit);
 
     }
 
@@ -131,6 +177,14 @@ int main() {
   runTest(TruckloadsTests::testSix);
 
   runTest(ReverseDigitTests::testOne);
+
+  runTest(ReverseDigitTests::testTwo);
+
+  runTest(ReverseDigitTests::testThree);
+
+  runTest(ReverseDigitTests::testFour);
+
+  runTest(ReverseDigitTests::testFive);
 
 
 }
