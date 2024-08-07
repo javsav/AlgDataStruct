@@ -1,4 +1,5 @@
 #include "Reverser.h"
+#include <iostream>
 #include <cmath>
 
 std::string Reverser::reverseString(std::string characters) {
@@ -18,19 +19,23 @@ std::string Reverser::reverseString(std::string characters) {
 
 int Reverser::reverseDigit(int value) {
 
-  // Calculate number of digits in current value
+  //Calculate number of digits in current value
   int numDigits = 0;
+  int tempValue = value;
   // Repeatedly divide by 10 until number == 0
   do {
-    value /= 10;
+    tempValue /= 10;
     numDigits++;
-  } while (value != 0);
+    std::cout << "Value: " << tempValue << " Actual value: " << value << " Num Digits: " << numDigits << "\n";
+  } while (tempValue >= 10);
+
+  std::cout << "Numdigits before next call: " << numDigits << " Value before next call: " << value << "\n";
 
   // Base case: value has two digits.
   if (value/10 < 10) {
     return ((value % 10) * 10) + (value / 10);
   }
-  
+
   // Modulo 10 returns the final digit, multiply by the number of digits and continue recursively
   return ((value % 10) * pow(10, numDigits) + reverseDigit(value/10));
 }
