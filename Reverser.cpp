@@ -23,7 +23,7 @@ int Reverser::reverseDigit(int value) {
   int powTen = 0;
   int tempValue = value;
   // Repeatedly divide by 10 while number >= 10
-  while (tempValue >= 10); {
+  while (tempValue >= 10) {
     tempValue /= 10;
     powTen++;
   }
