@@ -33,7 +33,7 @@ namespace UnitTest {
       
       std::cout << "Number of Trucks Required: " << Truckloads::numTrucks(numCrates, loadSize) << ".\n";
 
-      return Truckloads::numTrucks(numCrates, loadSize) == numCrates/loadSize;      
+      return Truckloads::numTrucks(numCrates, loadSize) == 8;      
 
     }
 
@@ -44,7 +44,7 @@ namespace UnitTest {
       
       std::cout << "Number of Trucks Required: " << Truckloads::numTrucks(numCrates, loadSize) << ".\n";
 
-      return Truckloads::numTrucks(numCrates, loadSize) == numCrates/loadSize;      
+      return Truckloads::numTrucks(numCrates, loadSize) == 32;      
 
     }
 
@@ -55,7 +55,40 @@ namespace UnitTest {
       
       std::cout << "Number of Trucks Required: " << Truckloads::numTrucks(numCrates, loadSize) << ".\n";
 
-      return Truckloads::numTrucks(numCrates, loadSize) == numCrates/loadSize;      
+      return Truckloads::numTrucks(numCrates, loadSize) == 6;      
+
+    }
+
+    bool testFour() {
+
+      numCrates = 15;
+      loadSize = 1;
+      
+      std::cout << "Number of Trucks Required: " << Truckloads::numTrucks(numCrates, loadSize) << ".\n";
+
+      return Truckloads::numTrucks(numCrates, loadSize) == 15;      
+
+    }
+
+    bool testFive() {
+
+      numCrates = 1024;
+      loadSize = 5;
+      
+      std::cout << "Number of Trucks Required: " << Truckloads::numTrucks(numCrates, loadSize) << ".\n";
+
+      return Truckloads::numTrucks(numCrates, loadSize) == 256;      
+
+    }
+
+    bool testSix() {
+
+      numCrates = 7;
+      loadSize = 2;
+      
+      std::cout << "Number of Trucks Required: " << Truckloads::numTrucks(numCrates, loadSize) << ".\n";
+
+      return Truckloads::numTrucks(numCrates, loadSize) == 4;      
 
     }
 
@@ -74,5 +107,10 @@ int main() {
 
   runTest(TruckloadsTests::testThree);
 
+  runTest(TruckloadsTests::testFour);
+
+  runTest(TruckloadsTests::testFive);
+
+  runTest(TruckloadsTests::testSix);
 
 }
