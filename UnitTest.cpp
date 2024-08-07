@@ -1,4 +1,5 @@
 #include "Truckloads.h"
+#include "Reverser.h"
 #include <iostream>
 
 namespace UnitTest {
@@ -17,6 +18,22 @@ namespace UnitTest {
       std::cout << "Test Passed.\n";
     } else {
       std::cout << "Test Failed.\n";
+    }
+
+  }
+
+  namespace ReverseDigitTests {
+
+    int digits;
+
+    bool testOne() {
+
+      digits = 1337;
+      
+      std::cout << "Digits in reverse: " << Reverser::reverseDigit(digits) << ".\n";
+
+      return Reverser::reverseDigit(digits) == 7331;
+
     }
 
   }
@@ -112,5 +129,8 @@ int main() {
   runTest(TruckloadsTests::testFive);
 
   runTest(TruckloadsTests::testSix);
+
+  runTest(ReverseDigitTests::testOne);
+
 
 }
