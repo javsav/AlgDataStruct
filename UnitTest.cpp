@@ -1,22 +1,49 @@
 #include "Truckloads.h"
 #include <iostream>
 
-namespace UnitTest {  
+namespace UnitTest {
+
+  static int num = 1;
+
+  void test() {
+    std::cout << "Test: " << num << "\n";
+    num++;
+  } 
+
+  void runTest(bool (*function)()) {
+    
+    if (function()) {
+      std::cout << "Test Passed.\n";
+    } else {
+      std::cout << "Test Failed.\n";
+    }
+
+  }
 
   namespace TruckloadsTests {    
     
     int numCrates;
-    int loadSize;
-    auto LoadTest = Truckloads::numTrucks(numCrates, loadSize);    
+    int loadSize;    
    
     bool testOne() {
 
       numCrates = 24;
       loadSize = 3;
       
-      std::cout << LoadTest << "\n";
+      std::cout << "Number of Trucks Required: " << Truckloads::numTrucks(numCrates, loadSize) << ".\n";
 
-      return LoadTest == numCrates/loadSize;      
+      return Truckloads::numTrucks(numCrates, loadSize) == numCrates/loadSize;      
+
+    }
+
+    bool testTwo() {
+
+      numCrates = 203;
+      loadSize = 7;
+      
+      std::cout << "Number of Trucks Required: " << Truckloads::numTrucks(numCrates, loadSize) << ".\n";
+
+      return Truckloads::numTrucks(numCrates, loadSize) == numCrates/loadSize;      
 
     }
 
@@ -25,8 +52,14 @@ namespace UnitTest {
 
 };
 
+using namespace UnitTest;
+
 int main() {
 
-  std::cout << UnitTest::TruckloadsTests::testOne() << "\n";
+
+  test();
+  runTest(TruckloadsTests::testOne);
+  test();
+  runTest(TruckloadsTests::testTwo);
 
 }
