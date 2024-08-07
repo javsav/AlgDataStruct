@@ -11,7 +11,8 @@ namespace UnitTest {
   } 
 
   void runTest(bool (*function)()) {
-    
+    test();
+
     if (function()) {
       std::cout << "Test Passed.\n";
     } else {
@@ -47,6 +48,17 @@ namespace UnitTest {
 
     }
 
+    bool testThree() {
+
+      numCrates = 14;
+      loadSize = 3;
+      
+      std::cout << "Number of Trucks Required: " << Truckloads::numTrucks(numCrates, loadSize) << ".\n";
+
+      return Truckloads::numTrucks(numCrates, loadSize) == numCrates/loadSize;      
+
+    }
+
     
   };
 
@@ -56,10 +68,11 @@ using namespace UnitTest;
 
 int main() {
 
-
-  test();
   runTest(TruckloadsTests::testOne);
-  test();
+
   runTest(TruckloadsTests::testTwo);
+
+  runTest(TruckloadsTests::testThree);
+
 
 }
