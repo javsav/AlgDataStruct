@@ -5,8 +5,8 @@
 class Reverser {
 
   public:
-
-  static int reverseDigit(int value);
+  // Not static due to test interface
+  int reverseDigit(int value);
 
   static std::string reverseString(std::string characters);
 
