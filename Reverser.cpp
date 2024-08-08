@@ -18,6 +18,10 @@ std::string Reverser::reverseString(std::string characters) {
 }
 
 int Reverser::reverseDigit(int value) {
+  // Handle invalid input
+  if (value < 0) {
+    return -1;
+  }
 
   // Calculate number of digits in current value
   int powTen = 0;
