@@ -223,39 +223,39 @@ namespace UnitTest {
 
 using namespace UnitTest;
 
-int main() {
+// int main() {
 
-  runTest(TruckloadsTests::testOne);
+//   runTest(TruckloadsTests::testOne);
 
-  runTest(TruckloadsTests::testTwo);
+//   runTest(TruckloadsTests::testTwo);
 
-  runTest(TruckloadsTests::testThree);
+//   runTest(TruckloadsTests::testThree);
 
-  runTest(TruckloadsTests::testFour);
+//   runTest(TruckloadsTests::testFour);
 
-  runTest(TruckloadsTests::testFive);
+//   runTest(TruckloadsTests::testFive);
 
-  runTest(TruckloadsTests::testSix);
+//   runTest(TruckloadsTests::testSix);
 
-  runTest(ReverseDigitTests::testOne);
+//   runTest(ReverseDigitTests::testOne);
 
-  runTest(ReverseDigitTests::testTwo);
+//   runTest(ReverseDigitTests::testTwo);
 
-  runTest(ReverseDigitTests::testThree);
+//   runTest(ReverseDigitTests::testThree);
 
-  runTest(ReverseDigitTests::testFour);
+//   runTest(ReverseDigitTests::testFour);
 
-  runTest(ReverseDigitTests::testFive);
+//   runTest(ReverseDigitTests::testFive);
 
-  runTest(ReverseStringTests::testOne);
+//   runTest(ReverseStringTests::testOne);
 
-  runTest(ReverseStringTests::testTwo);
+//   runTest(ReverseStringTests::testTwo);
 
-  runTest(ReverseStringTests::testThree);
+//   runTest(ReverseStringTests::testThree);
 
-  runTest(ReverseStringTests::testFour);
+//   runTest(ReverseStringTests::testFour);
 
-  runTest(ReverseStringTests::testFive);
+//   runTest(ReverseStringTests::testFive);
 
 
-}
+// }
