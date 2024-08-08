@@ -39,7 +39,7 @@ int Reverser::reverseDigit(int value) {
     return ((value % 10) * 10) + (value / 10);
   }
 
-  // Modulo 10 returns the final digit, multiply by the number of digits - 1 and continue recursively
+  // Modulo 10 returns the final digit, multiply by the 10^(number of digits - 1) and continue recursively
   return ((value % 10) * pow(10, powTen) + reverseDigit(value/10));
 }
 
