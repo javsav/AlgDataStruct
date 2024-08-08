@@ -14,12 +14,8 @@ std::string Reverser::reverseString(std::string characters) {
     return characters;
   }
 
-  // Create shortened string with the final character erased
-  std::string shortened = characters;
-  shortened.pop_back();
-
-  // Concatenate the final character of the string with recursive calls on the shortened string
-  return characters[characters.size() - 1] + reverseString(shortened);
+  // Concatenate the final character of the string with recursive calls on the string without the last character
+  return characters[characters.size() - 1] + reverseString(characters.substr(0, characters.size() - 1));
 }
 
 int Reverser::reverseDigit(int value) {
