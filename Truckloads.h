@@ -3,7 +3,7 @@
 
 class Truckloads {
 
-  public:
+ public:
 
   static int numTrucks(int numCrates, int loadSize);
 

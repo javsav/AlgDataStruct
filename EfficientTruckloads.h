@@ -3,11 +3,13 @@
 #include <array>
 
 class EfficientTruckloads {
+ 
+ public:
 
-  public:
   static void clearMemoizationCache();
   static int numTrucks(int numCrates, int loadSize);
   static std::array<int, 5000> loads;
+  
 };
 
-#endif // TRUCKLOADS_H
+#endif  // TRUCKLOADS_H
