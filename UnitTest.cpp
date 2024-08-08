@@ -1,5 +1,6 @@
 #include "Truckloads.h"
 #include "Reverser.h"
+#include "EfficientTruckloads.h"
 #include <iostream>
 #include <algorithm>
 
@@ -219,6 +220,80 @@ namespace UnitTest {
     
   };
 
+  namespace EfficientTruckloadsTests {    
+    
+    int numCrates;
+    int loadSize;    
+   
+    bool testOne() {
+
+      numCrates = 24;
+      loadSize = 3;
+      
+      std::cout << "Number of Trucks Required: " << EfficientTruckloads::numTrucks(numCrates, loadSize) << ".\n";
+
+      return EfficientTruckloads::numTrucks(numCrates, loadSize) == 8;      
+
+    }
+
+    bool testTwo() {
+
+      numCrates = 203;
+      loadSize = 7;
+      
+      std::cout << "Number of Trucks Required: " << EfficientTruckloads::numTrucks(numCrates, loadSize) << ".\n";
+
+      return EfficientTruckloads::numTrucks(numCrates, loadSize) == 32;      
+
+    }
+
+    bool testThree() {
+
+      numCrates = 14;
+      loadSize = 3;
+      
+      std::cout << "Number of Trucks Required: " << EfficientTruckloads::numTrucks(numCrates, loadSize) << ".\n";
+
+      return EfficientTruckloads::numTrucks(numCrates, loadSize) == 6;      
+
+    }
+
+    bool testFour() {
+
+      numCrates = 15;
+      loadSize = 1;
+      
+      std::cout << "Number of Trucks Required: " << EfficientTruckloads::numTrucks(numCrates, loadSize) << ".\n";
+
+      return EfficientTruckloads::numTrucks(numCrates, loadSize) == 15;      
+
+    }
+
+    bool testFive() {
+
+      numCrates = 1024;
+      loadSize = 5;
+      
+      std::cout << "Number of Trucks Required: " << EfficientTruckloads::numTrucks(numCrates, loadSize) << ".\n";
+
+      return EfficientTruckloads::numTrucks(numCrates, loadSize) == 256;      
+
+    }
+
+    bool testSix() {
+
+      numCrates = 7;
+      loadSize = 2;
+      
+      std::cout << "Number of Trucks Required: " << EfficientTruckloads::numTrucks(numCrates, loadSize) << ".\n";
+
+      return EfficientTruckloads::numTrucks(numCrates, loadSize) == 4;      
+
+    }
+
+    
+  };
+
 };
 
 using namespace UnitTest;
@@ -256,6 +331,18 @@ using namespace UnitTest;
 //   runTest(ReverseStringTests::testFour);
 
 //   runTest(ReverseStringTests::testFive);
+
+//   runTest(EfficientTruckloadsTests::testOne);
+
+//   runTest(EfficientTruckloadsTests::testTwo);
+
+//   runTest(EfficientTruckloadsTests::testThree);
+
+//   runTest(EfficientTruckloadsTests::testFour);
+
+//   runTest(EfficientTruckloadsTests::testFive);
+
+//   runTest(EfficientTruckloadsTests::testSix);
 
 
 // }
