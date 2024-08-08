@@ -4,6 +4,11 @@
 
 std::string Reverser::reverseString(std::string characters) {
 
+  // Input validation
+  if (characters.empty()) {
+    return "ERROR";
+  }
+  
   // Base case: one character remaining
   if (characters.size() == 1) {
     return characters;
