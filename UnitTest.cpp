@@ -238,6 +238,8 @@ namespace UnitTest {
 
     bool testTwo() {
 
+      EfficientTruckloads::clearMemoizationCache();
+
       numCrates = 203;
       loadSize = 7;
       
@@ -248,6 +250,8 @@ namespace UnitTest {
     }
 
     bool testThree() {
+
+      EfficientTruckloads::clearMemoizationCache();
 
       numCrates = 14;
       loadSize = 3;
@@ -260,6 +264,8 @@ namespace UnitTest {
 
     bool testFour() {
 
+      EfficientTruckloads::clearMemoizationCache();
+
       numCrates = 15;
       loadSize = 1;
       
@@ -271,6 +277,8 @@ namespace UnitTest {
 
     bool testFive() {
 
+      EfficientTruckloads::clearMemoizationCache();
+
       numCrates = 1024;
       loadSize = 5;
       
@@ -281,6 +289,8 @@ namespace UnitTest {
     }
 
     bool testSix() {
+
+      EfficientTruckloads::clearMemoizationCache();
 
       numCrates = 7;
       loadSize = 2;
@@ -343,6 +353,5 @@ using namespace UnitTest;
 //   runTest(EfficientTruckloadsTests::testFive);
 
 //   runTest(EfficientTruckloadsTests::testSix);
-
 
 // }
