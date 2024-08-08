@@ -87,11 +87,11 @@ namespace UnitTest {
 
   namespace ReverseStringTests {
 
-    int digits;
+    std::string str;
 
     bool testOne() {
 
-      std::string str = "HowDoYouDo";
+      str = "HowDoYouDo";
       
       std::cout << "String in reverse: " << Reverser::reverseString(str) << ".\n";
       std::string revStr = str;
@@ -102,7 +102,7 @@ namespace UnitTest {
 
     bool testTwo() {
 
-      std::string str = "RaCeCaR";
+      str = "RaCeCaR";
       
       std::cout << "String in reverse: " << Reverser::reverseString(str) << ".\n";
       std::string revStr = str;
@@ -113,7 +113,7 @@ namespace UnitTest {
 
     bool testThree() {
 
-      std::string str = "Evian";
+      str = "Evian";
       
       std::cout << "String in reverse: " << Reverser::reverseString(str) << ".\n";
       std::string revStr = str;
@@ -124,7 +124,7 @@ namespace UnitTest {
 
     bool testFour() {
 
-      std::string str = "X";
+      str = "X";
       
       std::cout << "String in reverse: " << Reverser::reverseString(str) << ".\n";
       std::string revStr = str;
@@ -135,7 +135,7 @@ namespace UnitTest {
 
     bool testFive() {
 
-      std::string str = "Spacey    J A N E";
+      str = "Spacey    J A N E";
       
       std::cout << "String in reverse: " << Reverser::reverseString(str) << ".\n";
       std::string revStr = str;
