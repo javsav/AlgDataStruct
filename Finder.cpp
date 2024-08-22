@@ -1,7 +1,7 @@
 #include "Finder.h"
 
 // Conventional Method
-std::vector<int> Finder::findSubstrings2(std::string& s1, std::string& s2) {
+std::vector<int> Finder::findSubstrings(std::string& s1, std::string& s2) {
   
   std::vector<int> result(s2.size(), -1);
   
@@ -31,7 +31,7 @@ std::vector<int> Finder::findSubstrings2(std::string& s1, std::string& s2) {
 }
 
 // Method using rolling polynomial hash
-std::vector<int> Finder::findSubstrings(std::string& s1, std::string& s2) {
+std::vector<int> Finder::findSubstrings2(std::string& s1, std::string& s2) {
  
   size_t numPrefixes = s2.size();
   const int base = 128;
