@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include <chrono>
+#include <string_view>
 
 
 class Finder {
