@@ -1,7 +1,5 @@
 #include "Finder.h"
 
-#include <iostream>
-
 std::vector<int> Finder::findSubstrings(std::string s1, std::string s2) {
   
   std::vector<int> result(s2.size(), -1);
