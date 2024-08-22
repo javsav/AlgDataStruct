@@ -12,6 +12,7 @@ std::vector<int> Finder::findSubstrings(std::string s1, std::string s2) {
     size_t found = s1.find(s2.substr(0, i), lastIndex);
     if (found != std::string::npos) {
       result[i - 1] = found;
+      lastIndex = found;
     } else {
       break;
     }
