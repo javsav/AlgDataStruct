@@ -10,7 +10,7 @@ std::vector<int> Finder::findSubstrings(std::string s1, std::string s2) {
   
   for (size_t i = 1; i <= s2.size(); i++) {
     // Prevent repeated checks of already matched characters
-    if (s1[lastIndex + i - 1] == s2[i]) {
+    if (s1[lastIndex + i - 1] == s2[i - 1]) {
       result[i - 1] = lastIndex;
       continue;
 
