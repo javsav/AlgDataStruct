@@ -11,7 +11,7 @@
           for (size_t j = lastIndex; lastIndex < s1.size(); lastIndex++) {
               if (s1[j] == s2[i]) {
                 for (size_t k = 0; k < i + 1; k++) {
-                  if (!s1[k + j] == s2[k]) {
+                  if (!(s1[k + j] == s2[k])) {
                     break;
                   }
                 }
