@@ -7,6 +7,7 @@
 #include <string>
 
 int main(int argc, char *argv[]) {
+  std::cout << "TEST" << "\n";
   RecursiveBinarySearch search;
   BubbleSort sort;
   // To store arguments for sorting and searching
