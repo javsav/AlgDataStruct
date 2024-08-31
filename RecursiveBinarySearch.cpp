@@ -19,6 +19,12 @@ bool RecursiveBinarySearch::search(std::vector<int>& list, int target) {
 }
 
 int RecursiveBinarySearch::binarySearchHelper(std::vector<int>& list, int target, int left, int right){
+  
+  // Base case
+  if (right - left < 0) {
+    return -1;
+  }
+  
   // Divide current section of list in half
   int mid = (left + right) / 2;
   // If target is found, return index

@@ -20,7 +20,6 @@ int main(int argc, char *argv[]) {
       // Iterate through current character array until null terminator
       while (*currentChar != '\0') {
         // Multiply by 10 for each digit after the first
-        std::cout << *currentChar << "\n";
         currentArg *= 10;
         // Handle negative sign
         if (*currentChar == '-') {
