@@ -44,7 +44,7 @@ int main(int argc, char *argv[]) {
     //   }
 
    
-      for (int i = 1; i < argc; i++) {
+      for (int i = 1; i < argc + 1; i++) {
         std::string currentCharArray = argv[i];
         int currentArg = stoi(currentCharArray);
         list.push_back(currentArg);
