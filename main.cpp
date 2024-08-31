@@ -43,11 +43,13 @@ int main(int argc, char *argv[]) {
     //     list[i - 1] = currentArg;
     //   }
 
+      
    
-      for (int i = 1; i < argc + 1; i++) {
+      for (int i = 0; i < argc; i++) {
         std::string currentCharArray = argv[i];
-        int currentArg = stoi(currentCharArray);
-        list.push_back(currentArg);
+        //int currentArg = stoi(currentCharArray);
+        //list.push_back(currentArg);
+        std::cout << argv[i] << "\n";
       }   
 
       // Sort list
