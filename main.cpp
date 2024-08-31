@@ -9,7 +9,7 @@
 
 int main(int argc, char *argv[]) {
   RecursiveBinarySearch search;
-  QuickSort sort;
+  BubbleSort sort;
   // To store arguments for sorting and searching
   std::vector<int> list(argc - 1, 0);
 
