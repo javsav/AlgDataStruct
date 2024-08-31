@@ -7,7 +7,7 @@
 #include <string>
 
 int main(int argc, char *argv[]) {
-  std::cout << "TEST:" << "\n";
+  std::cout << "TEST:" << argv[0] << "\n";
   //std::cout << argv[0] << "\n";
   //std::cout << argv[1] << "\n";
   RecursiveBinarySearch search;
