@@ -60,8 +60,8 @@ int main(int argc, char *argv[]) {
       }
 
       // Print the sorted list
-      for (auto i = list.begin(); i != list.end(); ++i) {
-        std::cout << *i << " ";
+      for (auto i = 0; i < list.size(); i++) {
+        std::cout << list[i] << " ";
       } std::cout << "\n";
     }
   return 0;
