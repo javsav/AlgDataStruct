@@ -5,10 +5,10 @@
 #include <stack>
 
 
-class Quicksort: public Sort {
+class QuickSort: public Sort {
  
  private:
-  void quickSortHelper(std::vector<int>& list, int left, int right);
+  void QuickSortHelper(std::vector<int>& list, int left, int right);
 
  public:
   std::vector<int>& sort(std::vector<int>& list);

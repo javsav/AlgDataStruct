@@ -35,3 +35,11 @@ int RecursiveBinarySearch::binarySearchHelper(std::vector<int>& list, int target
   return -1;
 
 }
+
+// int main() {
+//   RecursiveBinarySearch searcher;
+
+//   std::vector<int> list = { 1, 3, 5, 4, -5, 100, 7777, 2014 };
+
+//   searcher.search(list, 1);
+// }

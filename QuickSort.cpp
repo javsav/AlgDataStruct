@@ -1,11 +1,11 @@
-#include "Quicksort.h"
+#include "QuickSort.h"
 #include <ctime>
 #include <cstdlib>
 #include <iostream>
 
-std::vector<int>& Quicksort::sortIterative(std::vector<int>& list) {
+std::vector<int>& QuickSort::sortIterative(std::vector<int>& list) {
   // Struct to be stored within the virtual stack calls
-  struct quickSortCall {
+  struct QuickSortCall {
     // List is not required as we have a pointer to it already and each call
     // works on the same list
     int left;
@@ -13,10 +13,10 @@ std::vector<int>& Quicksort::sortIterative(std::vector<int>& list) {
   };
 
   // Use std::stack to emulate the call stack
-  std::stack<quickSortCall> callStack;
+  std::stack<QuickSortCall> callStack;
 
   // Push the first 'call' to the virtual stack so that the loop has something to process
-  callStack.push(quickSortCall{0, (int)list.size() - 1});
+  callStack.push(QuickSortCall{0, (int)list.size() - 1});
 
   // Continue processing stack 'frames' until the virtual stack is empty
   while (!callStack.empty()) {
@@ -58,26 +58,26 @@ std::vector<int>& Quicksort::sortIterative(std::vector<int>& list) {
     callStack.pop();
 
     // Push the next "recursive call structs" to the stack
-    callStack.push(quickSortCall{left, pivotIndex - 1});
-    callStack.push(quickSortCall{pivotIndex + 1, right});
+    callStack.push(QuickSortCall{left, pivotIndex - 1});
+    callStack.push(QuickSortCall{pivotIndex + 1, right});
   }
 
   return list;
 }
 
-std::vector<int>& Quicksort::sort(std::vector<int>& list) {
+std::vector<int>& QuickSort::sort(std::vector<int>& list) {
   // Left pointer
   int left = 0;
   // Right pointer (final index)
   int right = list.size() - 1;
 
-  quickSortHelper(list, left, right);
+  QuickSortHelper(list, left, right);
   
   return list;
    
 }
 
-void Quicksort::quickSortHelper(std::vector<int>& list, int left, int right) {
+void QuickSort::QuickSortHelper(std::vector<int>& list, int left, int right) {
 
   // Base Case: return if the list has 1 or less items
   if (left >= right) {
@@ -112,8 +112,8 @@ void Quicksort::quickSortHelper(std::vector<int>& list, int left, int right) {
   std::swap(list[pivotIndex], list[right]);
   
   // Recursively call the algorithm on the sections below and above the pivot
-  quickSortHelper(list, left, pivotIndex - 1);
-  quickSortHelper(list, pivotIndex + 1, right); 
+  QuickSortHelper(list, left, pivotIndex - 1);
+  QuickSortHelper(list, pivotIndex + 1, right); 
   
   
 }
@@ -124,7 +124,7 @@ void Quicksort::quickSortHelper(std::vector<int>& list, int left, int right) {
 
 
 // int main() {
-//   Quicksort sorter;
+//   QuickSort sorter;
 
 //    std::vector<int> list = {2,7,4,1,3,2,6,7,99,5,4,234,3};
 
