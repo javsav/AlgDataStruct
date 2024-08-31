@@ -8,8 +8,8 @@
 
 int main(int argc, char *argv[]) {
   std::cout << "TEST:" << "\n";
-  std::cout << argv[0] << "\n";
-  std::cout << argv[1] << "\n";
+  //std::cout << argv[0] << "\n";
+  //std::cout << argv[1] << "\n";
   RecursiveBinarySearch search;
   BubbleSort sort;
   // To store arguments for sorting and searching
