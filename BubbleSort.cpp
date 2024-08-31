@@ -4,7 +4,7 @@
 #include <iostream>
 
 
-std::vector<int>& BubbleSort::sort(std::vector<int>& list) {
+std::vector<int> BubbleSort::sort(std::vector<int> list) {
   
   size_t n = list.size();
  

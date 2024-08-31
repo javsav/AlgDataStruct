@@ -3,7 +3,7 @@
 #include <cstdlib>
 #include <iostream>
 
-std::vector<int>& QuickSort::sortIterative(std::vector<int>& list) {
+std::vector<int> QuickSort::sortIterative(std::vector<int> list) {
   // Struct to be stored within the virtual stack calls
   struct QuickSortCall {
     // List is not required as we have a pointer to it already and each call
@@ -65,7 +65,7 @@ std::vector<int>& QuickSort::sortIterative(std::vector<int>& list) {
   return list;
 }
 
-std::vector<int>& QuickSort::sort(std::vector<int>& list) {
+std::vector<int> QuickSort::sort(std::vector<int> list) {
   // Left pointer
   int left = 0;
   // Right pointer (final index)

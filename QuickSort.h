@@ -11,8 +11,8 @@ class QuickSort: public Sort {
   void QuickSortHelper(std::vector<int>& list, int left, int right);
 
  public:
-  std::vector<int>& sort(std::vector<int>& list);
-  std::vector<int>& sortIterative(std::vector<int>& list);
+  std::vector<int> sort(std::vector<int> list);
+  std::vector<int> sortIterative(std::vector<int> list);
 
 };
 
