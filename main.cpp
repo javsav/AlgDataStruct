@@ -7,12 +7,11 @@
 #include <string>
 
 int main(int argc, char *argv[]) {
-  //std::cout << argv[0] << "\n";
-  //std::cout << argv[1] << "\n";
+ 
   RecursiveBinarySearch search;
-  BubbleSort sort;
+  QuickSort sort;
   // To store arguments for sorting and searching
-  std::vector<int> list(argc - 1, 0);
+  std::vector<int> list;
 
     // For conversion of chars to int
     // UNIVERSITY SYSTEM SUCKS DOESN'T LET YOU WRITE YOUR OWN FUCKING CODE EVEN
@@ -43,15 +42,13 @@ int main(int argc, char *argv[]) {
     //     // Add to list
     //     list[i - 1] = currentArg;
     //   }
-std::cout << "ARGC = " << argc << "\n";
-  std::cout << argv[0] << argv[1] << argv[2] << "\n";
-   if (argc > 1) {
+
+   
       for (int i = 1; i < argc; i++) {
         std::string currentCharArray = argv[i];
         int currentArg = stoi(currentCharArray);
-        list[i - 1] = currentArg;
+        list.push_back(currentArg);
       }   
-  
 
       // Sort list
       sort.sort(list);
@@ -59,20 +56,15 @@ std::cout << "ARGC = " << argc << "\n";
       // Search for the number 1 in the list
       if (search.search(list, 1)) {
         std::cout << "true ";
-         // Print the sorted list
-      for (auto i = 0; i < list.size(); i++) {
-        std::cout << list[i] << " ";
-      } 
-
+        
       } else {
         std::cout << "false ";
-         // Print the sorted list
-      for (auto i = 0; i < list.size(); i++) {
-        std::cout << list[i] << " ";
-      } 
       }
 
+      // Print the sorted list
+      for (auto i = 0; i < list.size(); i++) {
+        std::cout << list[i] << " ";
+      } std::cout << "\n";
     
-    }
   return 0;
 }
