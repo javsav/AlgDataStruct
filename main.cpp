@@ -7,7 +7,7 @@
 #include <string>
 
 int main(int argc, char *argv[]) {
-  std::cout << "TEST:" << argv[0] << argv[1] << argv[2] << "\n";
+  //std::cout << "TEST:" << argv[0] << argv[1] << argv[2] << "\n";
   //std::cout << argv[0] << "\n";
   //std::cout << argv[1] << "\n";
   RecursiveBinarySearch search;
@@ -58,14 +58,20 @@ int main(int argc, char *argv[]) {
       // Search for the number 1 in the list
       if (search.search(list, 1)) {
         std::cout << "true ";
-      } else {
-        std::cout << "false ";
-      }
-
-      // Print the sorted list
+         // Print the sorted list
       for (auto i = 0; i < list.size(); i++) {
         std::cout << list[i] << " ";
-      } std::cout << "\n";
+      } 
+
+      } else {
+        std::cout << "false ";
+         // Print the sorted list
+      for (auto i = 0; i < list.size(); i++) {
+        std::cout << list[i] << " ";
+      } 
+      }
+
+    
     }
   return 0;
 }
