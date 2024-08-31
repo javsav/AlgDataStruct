@@ -11,7 +11,7 @@ int main(int argc, char *argv[]) {
   RecursiveBinarySearch search;
   BubbleSort sort;
   // To store arguments for sorting and searching
-  std::vector<int> list(argc - 1, 0);
+  std::vector<int> list;
 
     // For conversion of chars to int
     // UNIVERSITY SYSTEM SUCKS DOESN'T LET YOU WRITE YOUR OWN FUCKING CODE EVEN
@@ -47,7 +47,7 @@ int main(int argc, char *argv[]) {
       for (int i = 1; i < argc; i++) {
         std::string currentCharArray = argv[i];
         int currentArg = stoi(currentCharArray);
-        list[i - 1] = currentArg;
+        list.push_back(currentArg);
       }   
 
       // Sort list
