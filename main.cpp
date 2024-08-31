@@ -4,7 +4,6 @@
 #include "BubbleSort.h"
 #include <vector>
 #include <iostream>
-#include <vector>
 #include <string>
 
 int main(int argc, char *argv[]) {
@@ -61,8 +60,8 @@ int main(int argc, char *argv[]) {
       }
 
       // Print the sorted list
-      for (int number : list) {
-        std::cout << number << " ";
+      for (auto i = list.begin(); i != list.end(); ++i) {
+        std::cout << *i << " ";
       } std::cout << "\n";
     }
   return 0;
