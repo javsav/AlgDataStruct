@@ -7,7 +7,7 @@
 #include <string>
 
 int main(int argc, char *argv[]) {
-  std::cout << "TEST" << "\n";
+  
   RecursiveBinarySearch search;
   BubbleSort sort;
   // To store arguments for sorting and searching
@@ -43,7 +43,7 @@ int main(int argc, char *argv[]) {
     //     list[i - 1] = currentArg;
     //   }
 
-    if (argc > 1) {
+   // if (argc > 1) {
       for (int i = 1; i < argc; i++) {
         std::string currentCharArray = argv[i];
         int currentArg = stoi(currentCharArray);
@@ -64,6 +64,6 @@ int main(int argc, char *argv[]) {
       for (auto i = 0; i < list.size(); i++) {
         std::cout << list[i] << " ";
       } std::cout << "\n";
-    }
+   // }
   return 0;
 }
