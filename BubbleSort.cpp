@@ -4,7 +4,7 @@
 #include <iostream>
 
 
-std::vector<int> BubbleSort::sort(std::vector<int>& list) {
+std::vector<int>& BubbleSort::sort(std::vector<int>& list) {
   
   size_t n = list.size();
   
@@ -28,17 +28,15 @@ std::vector<int> BubbleSort::sort(std::vector<int>& list) {
   
 }
 
-int main() {
-  BubbleSort sorter;
+// int main() {
+//   BubbleSort sorter;
 
-  std::vector<int> list = {2,7,4,1,3,2,6,7,99,5,4,234,3};
+//   std::vector<int> list = {2,7,4,1,3,2,6,7,99,5,4,234,3};
 
-  sorter.sort(list);
+//   sorter.sort(list);
 
-  for (auto i = list.begin(); i != list.end(); ++i) {
-    std::cout << *i << "\n";
-  }
+//   for (auto i = list.begin(); i != list.end(); ++i) {
+//     std::cout << *i << "\n";
+//   }
 
-
-
-}
+// }

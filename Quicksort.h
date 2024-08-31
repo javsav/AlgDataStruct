@@ -4,12 +4,14 @@
 #include <cstddef>
 
 
-class Quicksort {
+class Quicksort: public Sort {
+ 
+ private:
+  void quickSortHelper(std::vector<int>& list, int left, int right);
 
  public:
- Quicksort();
- std::vector<int> sort(std::vector<int>& list);
- void quickSortHelper(std::vector<int>& list, size_t left, size_t right);
+  std::vector<int>& sort(std::vector<int>& list);
+
 };
 
 #endif

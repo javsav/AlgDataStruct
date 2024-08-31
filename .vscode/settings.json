@@ -44,6 +44,10 @@
     "typeinfo": "cpp",
     "iostream": "cpp",
     "istream": "cpp",
-    "ctime": "cpp"
+    "ctime": "cpp",
+    "ranges": "cpp",
+    "optional": "cpp",
+    "fstream": "cpp",
+    "sstream": "cpp"
   }
 }

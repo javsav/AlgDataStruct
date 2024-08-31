@@ -3,68 +3,68 @@
 #include <cstdlib>
 #include <iostream>
 
-Quicksort::Quicksort() {
-  std::srand(std::time(nullptr));
 
-}
+std::vector<int>& Quicksort::sort(std::vector<int>& list) {
+  // Left pointer
+  int left = 0;
+  // Right pointer (final index)
+  int right = list.size() - 1;
 
-std::vector<int> Quicksort::sort(std::vector<int>& list) {
-
-  
-  int end = list.size() - 1;
-  int start = 0;
-
-  quickSortHelper(list, start, end);
+  quickSortHelper(list, left, right);
   
   return list;
    
 }
 
-void Quicksort::quickSortHelper(std::vector<int>& list, size_t start, size_t end) {
+void Quicksort::quickSortHelper(std::vector<int>& list, int left, int right) {
 
-
-  if (start >= end) {
+  // Base Case: return if the list has 1 or less items
+  if (left >= right) {
     return;
   }
   
-  int size = end - start + 1; 
+  // Obtain current size
+  size_t size = right - left + 1;
+
   
+  // Set pivotIndex to start of current list section  
+  size_t pivotIndex = left;
   
-  // size_t pivotValueIndex;
-  size_t pivotIndex = start;
-  
-  if (size >= 3) {
-    std::swap(list[2], list[end]);       
-  } else {
-    int rand = std::rand() % size;
-    std::swap(list[rand - 1], list[end]);
+
+  // Choose third item as pivot if size > 3 and swap with end of list section
+  if (size > 3) {
+    std::swap(list[left + 2], list[right]);       
   }
 
-  int pivotValue = list[end];
+  // Pivot value is at the end of the section
+  int pivotValue = list[right];
 
 
-  for (size_t i = start; i <= end; i++) {
-    if (list[i] < pivotValue) {
+  for (size_t i = left; i < right; i++) {
+    // Swap smaller/equal items with the pivot index and increment the index
+    if (list[i] <= pivotValue) {
       std::swap(list[i], list[pivotIndex++]);    
     }
   }
 
-  std::swap(list[end], list[pivotIndex++]);
+  // Place the pivot in its appropriate index
+  std::swap(list[pivotIndex], list[right]);
 
-  return quickSortHelper(list, start, pivotIndex - 1);
-  return quickSortHelper(list, pivotIndex + 1, end); 
+  // Recursively call the algorithm on the sections below and above the pivot
+  quickSortHelper(list, left, pivotIndex - 1);
+  quickSortHelper(list, pivotIndex + 1, right); 
 
   
 }
 
-int main() {
-  Quicksort sorter;
+// int main() {
+//   Quicksort sorter;
 
-   std::vector<int> list = {2,7,4,1,3,2,6,7,99,5,4,234,3};
+//    std::vector<int> list = {2,7,4,1,3,2,6,7,99,5,4,234,3};
 
-    sorter.sort(list);
+//     std::vector<int> newlist = sorter.sort(list);
 
-  for (auto i = list.begin(); i != list.end(); ++i) {
-    std::cout << *i << "\n";
-  }
-}
+//   for (auto i = newlist.begin(); i != newlist.end(); ++i) {
+//     std::cout << *i << ", ";
+//   }
+// }
