@@ -16,6 +16,35 @@ std::vector<int>& Quicksort::sort(std::vector<int>& list) {
    
 }
 
+std::vector<int>& Quicksort::sortIterative(std::vector<int>& list) {
+
+  struct quickSortCall {
+    std::vector<int>& list;
+    int left;
+    int right;
+  };
+
+  std::stack<quickSortCall> callStack;
+
+  quickSortCall initialCall{list, 0, list.size() - 1};
+  
+  while ((callStack.top().right - callStack.top().left) > 0) {
+    std::vector<int>& listRef = callStack.top().list;
+    int& left = callStack.top().left;
+    int& right = callStack.top().right;
+    size_t size = callStack.top().right - callStack.top().left + 1;
+    size_t pivotIndex = callStack.top().left;
+
+    int pivotValue = listRef[right];
+    
+  }
+
+
+
+
+}
+
+
 void Quicksort::quickSortHelper(std::vector<int>& list, int left, int right) {
 
   // Base Case: return if the list has 1 or less items

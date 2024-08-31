@@ -2,6 +2,7 @@
 #define QUICKSORT_H
 #include "Sort.h"
 #include <cstddef>
+#include <stack>
 
 
 class Quicksort: public Sort {
@@ -11,6 +12,7 @@ class Quicksort: public Sort {
 
  public:
   std::vector<int>& sort(std::vector<int>& list);
+  std::vector<int>& sortIterative(std::vector<int>& list);
 
 };
 
