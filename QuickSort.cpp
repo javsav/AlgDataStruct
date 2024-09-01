@@ -117,21 +117,3 @@ void QuickSort::QuickSortHelper(std::vector<int>& list, int left, int right) {
   
   
 }
-
-
-
-
-
-
-// int main() {
-//   QuickSort sorter;
-
-//    std::vector<int> list = {2,7,4,1,3,2,6,7,99,5,4,234,3};
-
-//   sorter.sortIterative(list);
-
-//   for (auto i = list.begin(); i != list.end(); ++i) {
-//       std::cout << *i << ", ";
-//   }
-  
-// }
