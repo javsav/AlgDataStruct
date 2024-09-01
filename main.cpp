@@ -13,9 +13,10 @@ int main(int argc, char *argv[]) {
   // To store arguments for sorting and searching
   std::vector<int> list(argc - 1, 0);
   
-  int test;
+  int test = 0;
   while(argv[test] != nullptr) {
-    std::cout << argv[test] << " ";
+    std::cout << "argv: " << test << " = " << argv[test] << " ";
+    test++;
   }
   //if (argc > 1) {
     // // Method converting to string then int
