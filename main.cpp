@@ -13,8 +13,11 @@ int main(int argc, char *argv[]) {
   // To store arguments for sorting and searching
   std::vector<int> list(argc - 1, 0);
   
-  
-  if (argc > 1) {
+  int test;
+  while(argv[test] != nullptr) {
+    std::cout << argv[test] << " ";
+  }
+  //if (argc > 1) {
     // // Method converting to string then int
     // for (int i = 1; i < argc; i++) {
     //   std::string currentCharArray = argv[i];
@@ -76,6 +79,6 @@ int main(int argc, char *argv[]) {
       std::cout << *i << " ";
     } 
     std::cout << std::endl;
-  }
+  //}
   return 0;
 }
