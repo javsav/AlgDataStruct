@@ -12,9 +12,7 @@ int main(int argc, char *argv[]) {
   // To store arguments for sorting and searching
   std::vector<int> list(argc - 1, 0);
 
-    // For conversion of chars to int
-    // UNIVERSITY SYSTEM SUCKS DOESN'T LET YOU WRITE YOUR OWN FUCKING CODE EVEN
-    // THOUGH YOU PUT HEAPS OF EFFORT INTO IT
+    // For conversion of chars to int 
     // // Iterate through argument vector
     // if (argc > 1) {
     //   for (int i = 1; i < argc; i++) {
