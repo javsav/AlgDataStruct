@@ -11,58 +11,60 @@ int main(int argc, char *argv[]) {
   RecursiveBinarySearch search;
   QuickSort sort;
   // To store arguments for sorting and searching
-  std::vector<int> list(argc - 1, 0);
-  
-  int test = 0;
-  while(argv[test] != nullptr) {
-    std::cout << "argv: " << test << " = " << argv[test] << " ";
-    test++;
-  }
-  //if (argc > 1) {
-    // // Method converting to string then int
-    // for (int i = 1; i < argc; i++) {
-    //   std::string currentCharArray = argv[i];
-    //   int currentArg = stoi(currentCharArray);
-    //   list[i - 1] = currentArg;
-    // }
+  std::vector<int> list;  
+  // Check whether arguments are passed other than the title of main
+  if (argc > 1) {
+    // Method converting to string then int
+    for (int i = 1; argv[i] != nullptr; i++) {
+      std::string currentCharArray = argv[i];
+      // Check that current argument is within int range
+      try {
+        stoi(currentCharArray);
+      // If out of range, continue to next argument
+      } catch (...) {
+        continue;
+      }
+      list.push_back(stoi(currentCharArray));
+    }   
 
     // Mathematical method
     // Iterate through argument vector if arguments passed to main
 
-    for (int i = 1; argv[i] != nullptr; i++) {
-      char* currentChar = argv[i];
-      int currentArg = 0;
-      // Iterate through current character array until null terminator
-      while (*currentChar != '\0') {
-        // Set values outside range of int to 0
-        if (abs(currentArg) > INT32_MAX / 10) {
-          currentArg = 0;
-          continue;
-        }
-        // Multiply by 10 for each digit after the first
-        currentArg *= 10;
-        // Handle negative sign
-        if (*currentChar == '-') {
-          currentChar++;
-          currentArg += (*currentChar - '0');
-          currentArg *= -1;
-          currentChar++;
-          continue;          
-        } else if (currentArg >= 0) {
-          // Obtain the ASCII value by subtracting zero character and add to currentArg
-          currentArg += (*currentChar - '0');
-          currentChar++;
-          continue;
-        } else {
-          currentArg += ((*currentChar - '0') * -1);
-          currentChar++;
-        }
-      }
-        // Add to list
-        list[i - 1] = currentArg;
-        // Discard value outside of int range
+    // for (int i = 1; argv[i] != nullptr; i++) {
+    //   char* currentChar = argv[i];
+    //   int currentArg = 0;
+    //   // Iterate through current character array until null terminator
+    //   while (*currentChar != '\0') {
+    //     // Set values outside range of int to 0
+    //     if (abs(currentArg) > INT32_MAX / 10) {
+    //       currentArg = 0;
+    //       currentChar++;
+    //       continue;
+    //     }
+    //     // Multiply by 10 for each digit after the first
+    //     currentArg *= 10;
+    //     // Handle negative sign
+    //     if (*currentChar == '-') {
+    //       currentChar++;
+    //       currentArg += (*currentChar - '0');
+    //       currentArg *= -1;
+    //       currentChar++;
+    //       continue;          
+    //     } else if (currentArg >= 0) {
+    //       // Obtain the ASCII value by subtracting zero character and add to currentArg
+    //       currentArg += (*currentChar - '0');
+    //       currentChar++;
+    //       continue;
+    //     } else {
+    //       currentArg += ((*currentChar - '0') * -1);
+    //       currentChar++;
+    //     }
+    //   }
+    //     // Add to list
+    //     list.push_back(currentArg);
+    //     // Discard value outside of int range
         
-    }
+    // }
    
     // Sort list
     sort.sort(list);
@@ -80,6 +82,6 @@ int main(int argc, char *argv[]) {
       std::cout << *i << " ";
     } 
     std::cout << std::endl;
-  //}
+  }
   return 0;
 }
