@@ -7,10 +7,11 @@
 #include <string>
 
 int main(int argc, char *argv[]) {
+ 
   RecursiveBinarySearch search;
-  BubbleSort sort;
+  QuickSort sort;
   // To store arguments for sorting and searching
-  std::vector<int> list(argc - 1, 0);
+  std::vector<int> list;
 
     // For conversion of chars to int 
     // // Iterate through argument vector
@@ -40,7 +41,7 @@ int main(int argc, char *argv[]) {
     //     list[i - 1] = currentArg;
     //   }
 
-    if (argc > 1) {
+   if (argc > 1) {
       for (int i = 1; i < argc; i++) {
         std::string currentCharArray = argv[i];
         int currentArg = stoi(currentCharArray);
@@ -53,6 +54,7 @@ int main(int argc, char *argv[]) {
       // Search for the number 1 in the list
       if (search.search(list, 1)) {
         std::cout << "true ";
+        
       } else {
         std::cout << "false ";
       }
