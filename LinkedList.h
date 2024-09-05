@@ -6,13 +6,14 @@
 class LinkedList {
 
  private:
-  size_t size;
-  Node* start;
+  size_t size = 0;
+  Node* head;
   Node* end;
 
  public:
   LinkedList();
   LinkedList(int* array, int len);
+  int get(int position);
 
 
 };

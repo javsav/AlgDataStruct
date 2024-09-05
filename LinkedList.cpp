@@ -2,14 +2,45 @@
 
 LinkedList::LinkedList() {
 
-  Node* start = new Node;
+  Node* newNode = new Node;
+  this->head = newNode;
+  this->end = newNode;
+  newNode->setNext(nullptr);
+  size++;
 
 }
 
 LinkedList::LinkedList(int* array, int len) {
-  for (int i = 0; i < len; i++) {
-    Node* node = new Node(array[0]);
-    Node* temp;
-    node
+  Node* head = new Node(array[0]);
+  this->head = head;
+  Node* tempNext = head;
+  size++;
+
+  for (int i = 1; i < len; i++) {    
+    Node* newNode = new Node(array[i]);
+    tempNext->setNext(newNode);
+    tempNext = newNode;
+    size++;  
+    if (i == len - 1) {
+      this->end = newNode;
+      newNode->setNext(nullptr);
+    }
   }
+
+} 
+
+int LinkedList::get(int position) {
+  if (position > size - 1) {
+    return -1;
+  }
+
+  int count = 0;
+  Node* iterator = head;
+
+  while (count < position) {
+    iterator = iterator->getNext();
+    count++;
+  }
+
+  return iterator->getData();
 }
