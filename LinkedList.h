@@ -6,7 +6,7 @@
 class LinkedList {
 
  private:
-  size_t size = 0;
+  int size = 0;
   Node* head;
   Node* tail;
 
