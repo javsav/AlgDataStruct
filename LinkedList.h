@@ -8,12 +8,18 @@ class LinkedList {
  private:
   size_t size = 0;
   Node* head;
-  Node* end;
+  Node* tail;
 
  public:
   LinkedList();
   LinkedList(int* array, int len);
   int get(int position);
+  void insertPosition(int position, int newNum);
+  int begin();
+  int end();
+  int search(int target);
+  void printList();
+  bool deletePosition(int position);
 
 
 };
