@@ -6,7 +6,7 @@
 class LinkedList {
 
  private:
-  int size = 0;
+  int m_size = 0;
   Node* head;
   Node* tail;
 
@@ -20,6 +20,9 @@ class LinkedList {
   int search(int target);
   void printList();
   bool deletePosition(int position);
+  int size();
+  void deleteList();
+  ~LinkedList();
 
 
 };

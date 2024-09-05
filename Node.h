@@ -4,16 +4,16 @@
 class Node {
 
  private:
-  int data;
-  Node* next;
+  int m_data;
+  Node* link;
 
  public:
   Node(int data);
   Node();
   void setData(int data);
   void setNext(Node* next);
-  int getData();
-  Node* getNext();
+  int data();
+  Node* next();
 
 };
 
