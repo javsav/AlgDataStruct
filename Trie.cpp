@@ -92,7 +92,7 @@ void Trie<int>::insertRouter(std::string address, int routerNumber) {
   character++;
 
   if (character == address.end()) {
-    current->isLeaf = true;
+    current->isLeaf = routerNumber;
     return;
   }
 
