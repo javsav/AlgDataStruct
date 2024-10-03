@@ -276,9 +276,7 @@ int Trie<int>::findRouter(std::string address) {
     current = next;
     digit++;
   }
-  TrieNode<int>* longest;
   return findNext(current);
-  //return longest->isLeaf;
 }
 
 template<>
