@@ -242,7 +242,7 @@ int Trie<int>::findNext(TrieNode<int>* current) {
     return current->isLeaf;
   }
 
-  for (int i = 0; i < digits; i++) {
+  for (int i = 0; i < numbers; i++) {
     if (current->children[i] != nullptr) {
       TrieNode<int>* next = current->children[i];
       return findNext(next);
@@ -301,7 +301,7 @@ void Trie<int>::findAll(TrieNode<int>* current, std::string& prefix, std::vector
     words.push_back(prefix);
   }
 
-  for (int i = 0; i < digits; i++) {
+  for (int i = 0; i < numbers; i++) {
     if (current->children[i] != nullptr) {
       TrieNode<int>* next = current->children[i];
       prefix += next->data;
@@ -356,7 +356,7 @@ template<>
 void Trie<int>::printTrie() {
   std::vector<std::string> words;
   std::string word;
-  for (int i = 0; i < digits; i++) {
+  for (int i = 0; i < numbers; i++) {
     if (parent.children[i] != nullptr) {      
       word += parent.children[i]->data + '0';
       findAll(parent.children[i], word, words);
@@ -387,13 +387,13 @@ void Trie<char>::free(TrieNode<char>* node) {
 template<>
 void Trie<int>::free(TrieNode<int>* node) {
 
-  for (int i = 0; i < digits; i++) {
+  for (int i = 0; i < numbers; i++) {
     if (node->children[i] != nullptr) {      
       free(node->children[i]);
     }
   }
 
-  for (int i = 0; i < digits; i++) {
+  for (int i = 0; i < numbers; i++) {
     TrieNode<int>* temp = node->children[i];
     delete temp;
     node->children[i] = nullptr;

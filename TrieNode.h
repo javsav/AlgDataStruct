@@ -2,7 +2,7 @@
 #define TRIENODE_H
 
 #define chars 26
-#define digits 10
+#define numbers 10
 
 template<class T>
 class TrieNode;
@@ -29,7 +29,7 @@ class TrieNode<int> {
 
  private:
   int data;
-  TrieNode<int>* children[digits]{{}};
+  TrieNode<int>* children[numbers]{{}};
   int isLeaf = false;
   template<class T> friend class Trie;
 
