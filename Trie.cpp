@@ -40,10 +40,10 @@ void Trie::insert(std::string word) {
 
 TrieNode* Trie::search(std::string word) {
   auto character = word.begin();
+  
   if (!parent.children[*character - 'a']) {
     return nullptr;
   }
-  std::cout << *character << '\n';
 
   TrieNode* current = parent.children[*character - 'a'];
   character++;
@@ -55,8 +55,6 @@ TrieNode* Trie::search(std::string word) {
   TrieNode* next;
 
   while (character != word.end()) {
-    std::cout << *character << '\n';
-
     next = current->children[*character - 'a'];
     if (!next) {
       return nullptr;
@@ -66,7 +64,6 @@ TrieNode* Trie::search(std::string word) {
   }
 
   if (current->isLeaf == true) {
-    std::cout << "found\n";
     return current;
   }
 
