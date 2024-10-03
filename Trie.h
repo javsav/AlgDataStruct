@@ -13,9 +13,10 @@ class Trie {
 
  public:
   Trie();
-  void insert(std::string& word);
+  void insert(std::string word);
   TrieNode* search(std::string word);
   std::vector<std::string> matchPrefix(std::string prefix);
+  void findAll(TrieNode* current, std::string& prefix, std::vector<std::string>& words);
 };
 
 #endif //TRIE_H

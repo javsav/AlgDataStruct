@@ -3,16 +3,30 @@
 
 int main() {
   Trie Tree;
-  std::string insert = "salmon";
-  Tree.insert(insert);
+  Tree.insert("salmon");
 
-  std::cout << Tree.search("salmon") << '\n';
-  std::cout << Tree.search("beef") << '\n';
-  insert = "beef";
-  Tree.insert(insert);
-  std::cout << Tree.search("beef") << '\n';
+  Tree.insert("bead");
 
-  //char datum = pars['s' - 'a'].children['a'-'a']->data;
+  Tree.insert("beer");
 
-  //std::cout << datum << '\n';
+  Tree.insert("bear");
+
+  Tree.insert("beautiful");
+
+  Tree.insert("beam");
+
+  std::cout << Tree.search("bead") << '\n';
+  std::cout << Tree.search("beer") << '\n';
+  std::cout << Tree.search("bear") << '\n';
+  std::cout << Tree.search("beautiful") << '\n';
+  std::cout << Tree.search("beam") << '\n';
+
+  std::vector<std::string> matches = Tree.matchPrefix("be");
+
+  for (auto word = matches.begin(); word != matches.end(); ++word) {
+    std::cout << *word << ' ';
+  }
+  std::cout << '\n';
+
+ 
 }

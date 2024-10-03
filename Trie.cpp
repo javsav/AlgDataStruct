@@ -4,10 +4,17 @@
 
 Trie::Trie() {}
 
-void Trie::insert(std::string& word) {
+void Trie::insert(std::string word) {
   auto character = word.begin();
-  TrieNode* current = new TrieNode(*character);
-  parent.children[*character - 'a'] = current;
+  TrieNode* current; 
+
+  if (!parent.children[*character - 'a']) {
+    current = new TrieNode(*character);
+    parent.children[*character - 'a'] = current;
+  } else {
+    current = parent.children[*character - 'a'];
+  }
+  
   character++;
 
   if (character == word.end()) {
@@ -16,8 +23,15 @@ void Trie::insert(std::string& word) {
   }
 
   while (character != word.end()) {
-    TrieNode* newNode = new TrieNode(*character);
-    current->children[*character - 'a'] = newNode;
+    TrieNode* newNode;
+
+    if (!current->children[*character - 'a']) {
+      newNode = new TrieNode(*character);
+      current->children[*character - 'a'] = newNode;
+    } else {
+      newNode = current->children[*character - 'a'];
+    }
+    
     current = newNode;
     character++;
   }
@@ -29,6 +43,7 @@ TrieNode* Trie::search(std::string word) {
   if (!parent.children[*character - 'a']) {
     return nullptr;
   }
+  std::cout << *character << '\n';
 
   TrieNode* current = parent.children[*character - 'a'];
   character++;
@@ -40,23 +55,47 @@ TrieNode* Trie::search(std::string word) {
   TrieNode* next;
 
   while (character != word.end()) {
+    std::cout << *character << '\n';
+
     next = current->children[*character - 'a'];
     if (!next) {
       return nullptr;
     }
     current = next;
-    if (current->isLeaf == true) {
-      return current;
-    }
     character++;
   }
 
-  return nullptr; 
+  if (current->isLeaf == true) {
+    std::cout << "found\n";
+    return current;
+  }
+
+  return current; 
 
 }
 
 std::vector<std::string> Trie::matchPrefix(std::string prefix) {
   std::vector<std::string> matches;
 
-  
+  TrieNode* prefixNode = search(prefix);
+  if (!prefixNode) {
+    return matches;
+  }
+  findAll(prefixNode, prefix, matches);
+  return matches;  
+}
+
+void Trie::findAll(TrieNode* current, std::string& prefix, std::vector<std::string>& words) {
+  if (current->isLeaf) {
+    words.push_back(prefix);
+  }
+
+  for (int i = 0; i < chars; i++) {
+    if (current->children[i] != nullptr) {
+      TrieNode* next = current->children[i];
+      prefix += next->data;
+      findAll(next, prefix, words); // Recursively search
+      prefix.pop_back(); // Backtrack
+    }
+  }
 }
