@@ -1,10 +1,6 @@
 #include "TrieNode.h"
 
-TrieNode::TrieNode(char letter, bool isLeaf) : data(letter), isLeaf(isLeaf) {
-  for (int i = 0; i < chars; i++) {
-    children[i] = nullptr;
-  }
-}
+TrieNode::TrieNode(char letter, bool isLeaf) : data(letter), isLeaf(isLeaf) {}
 
 TrieNode::TrieNode(char letter) : TrieNode::TrieNode(letter, false) {}
 

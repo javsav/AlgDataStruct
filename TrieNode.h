@@ -8,10 +8,10 @@
 class TrieNode {
  private:
   char data;
-  std::unordered_set<TrieNode*> children;
+  TrieNode* children[chars];
   bool isLeaf = false;
   friend class Trie;
-  friend struct TrieNodeHash;
+  friend class Autocomplete;
  public:
   char operator==(const TrieNode& node);
   operator char();

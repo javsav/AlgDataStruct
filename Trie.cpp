@@ -4,93 +4,53 @@
 Trie::Trie() {}
 
 void Trie::insert(std::string word) {
-  auto pointer = word.begin();
-  TrieNode* current = new TrieNode(*pointer);
-  parent.children.insert(current);
-  pointer++;
+  auto character = word.begin();
+  TrieNode* current = new TrieNode(*character);
+  parent.children[*character - 'a'] = current;
+  character++;
 
-  if (pointer == word.end()) {
+  if (character == word.end()) {
     current->isLeaf = true;
     return;
   }
 
-  while (pointer != word.end()) {
-    TrieNode* newNode = new TrieNode(*pointer);
-    current->children.insert(newNode);
+  while (character != word.end()) {
+    TrieNode* newNode = new TrieNode(*character);
+    current->children[*character - 'a'] = newNode;
     current = newNode;
-    pointer++;
+    character++;
   }
+  current->isLeaf = true;
 }
 
 bool Trie::search(std::string word) {
-  auto pointer = word.begin();
-
-  if (!parent.children.count(new TrieNode(*pointer))) {
+  auto character = word.begin();
+  if (!parent.children[*character - 'a']) {
     return false;
   }
 
-  auto current = parent.children.find(new TrieNode(*pointer));
-  pointer++;
+  TrieNode* current = parent.children[*character - 'a'];
+  character++;
 
-  if (pointer == word.end()) {
+  if (character == word.end()) {
     return true;
   }
-  TrieNode* currentNode = *current;
-  auto next = currentNode->children.find(new TrieNode(*pointer));
-  while (pointer != word.end()) {    
-    next = currentNode->children.find(new TrieNode(*pointer));
-    
-    if (next == currentNode->children.end()) {
+
+  TrieNode* next;
+
+  while (character != word.end()) {
+    next = current->children[*character - 'a'];
+    if (!next) {
       return false;
     }
-    currentNode = *next;
-    if (currentNode->isLeaf == true) {
+    current = next;
+    if (current->isLeaf == true) {
       return true;
     }
+    character++;
   }
 
   return false; 
 
 }
 
-// void Trie::insert(std::string word) {
-//   // check length
-  
-//   auto pointer = word.begin();
-//   Node* parent = &parents[*pointer - 'a'];  
-//   pointer++;
-//   Node* child = parent->children[*pointer - 'a'];
-//   child = new Node(*pointer);
-//   if (pointer == word.end()) {
-//     child->isLeaf = true;
-//   }
-
-//   pointer++;
-
-//   while (pointer != word.end()) {
-//     Node* newNode = new Node(*pointer);
-//     child->children[*pointer - 'a'] = newNode;
-//     child = newNode;
-//     pointer++;
-//   }
-
-//   child->isLeaf = true;
-
-// }
-
-// bool Trie::search(std::string word) {
-
-//   auto pointer = word.begin();
-//   std::cout << *pointer << '\n';
-//   Node* current = &parents[*pointer - 'a'];
-//   std::cout << current->data;
-
-//   pointer++;
-
-//   while (pointer != word.end()) {
-//     std::cout << current->data;
-//     current = current->children[*pointer - 'a'];
-//     pointer++;    
-//   }
-// return true;
-// }
