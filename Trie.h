@@ -3,6 +3,8 @@
 
 #include "TrieNode.h"
 #include <string>
+#include <vector>
+
 class Trie {
 
  private:
@@ -11,8 +13,9 @@ class Trie {
 
  public:
   Trie();
-  void insert(std::string word);
-  bool search(std::string word);
+  void insert(std::string& word);
+  TrieNode* search(std::string word);
+  std::vector<std::string> matchPrefix(std::string prefix);
 };
 
 #endif //TRIE_H
