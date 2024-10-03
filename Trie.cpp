@@ -246,7 +246,6 @@ int Trie<int>::findNext(TrieNode<int>* current) {
     if (current->children[i] != nullptr) {
       TrieNode<int>* next = current->children[i];
       return findNext(next);
-      break;
     }
   }
   return 0;
