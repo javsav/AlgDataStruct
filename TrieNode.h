@@ -3,17 +3,17 @@
 
 #define chars 26
 
-
+template<class T>
 class TrieNode {
- private:
-  char data;
-  TrieNode* children[chars] {{}};
-  bool isLeaf = false;  
-  friend class Trie;
+ public:
+  T data;
+  TrieNode<T>* children[chars] {{}};
+  int isLeaf = false;  
+  //friend class Trie;
  public:
   operator char();
-  TrieNode(char letter);
-  TrieNode(char letter, bool isLeaf);
+  TrieNode(T letter);
+  TrieNode(T letter, bool isLeaf);
   TrieNode();
 };
 

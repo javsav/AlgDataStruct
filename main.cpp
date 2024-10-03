@@ -2,7 +2,7 @@
 #include <iostream>
 
 int main() {
-  Trie Tree;
+  Trie<char> Tree;
   Tree.insert("salmon");
 
   Tree.insert("bead");
@@ -56,4 +56,23 @@ int main() {
   Tree.deleteTrie();
 
   Tree.printTrie();
+
+  Trie<int> numTree;
+
+  numTree.insertRouter("1100110111", 1);
+  numTree.insertRouter("110011011", 2);
+  numTree.insertRouter("11001101", 3);
+
+  numTree.printTrie();
+
+  int router = numTree.findRouter("1100110113");
+
+  std::cout << "router number: " << router << '\n';
+
+  // std::vector<std::string> nums = numTree.matchPrefix("19");
+
+  // for (auto num:nums) {
+  //   std::cout << num << ' ';
+  // }
+  // std::cout << '\n';
 }
