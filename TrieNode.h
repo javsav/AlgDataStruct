@@ -8,7 +8,7 @@
 class TrieNode {
  private:
   char data;
-  TrieNode* children[chars];
+  TrieNode* children[chars] {{}};
   bool isLeaf = false;
   friend class Trie;
   friend class Autocomplete;
