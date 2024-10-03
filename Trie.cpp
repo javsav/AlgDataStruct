@@ -290,7 +290,7 @@ void Trie<char>::findAll(TrieNode<char>* current, std::string& prefix, std::vect
       TrieNode<char>* next = current->children[i];
       prefix += next->data;
       findAll(next, prefix, words); // Recursively search
-      prefix.pop_back(); // Backtrack
+      prefix.pop_back();            // Backtrack
     }
   }
 }
