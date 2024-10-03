@@ -9,7 +9,6 @@ class Trie {
 
  private:
   TrieNode parent;
-  friend class Autocomplete;
 
  public:
   Trie();
