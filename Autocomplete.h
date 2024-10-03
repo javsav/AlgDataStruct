@@ -6,7 +6,7 @@
 
 class Autocomplete {
  private:
- Trie trie;
+  Trie trie;
  public:
   std::vector<std::string> getSuggestions(std::string partialWord);
   void insert(std::string word);

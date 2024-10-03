@@ -40,7 +40,6 @@ void Trie::insert(std::string word) {
 
 TrieNode* Trie::search(std::string word) {
   auto character = word.begin();
-  
   if (!parent.children[*character - 'a']) {
     return nullptr;
   }
@@ -63,12 +62,40 @@ TrieNode* Trie::search(std::string word) {
     character++;
   }
 
-  if (current->isLeaf == true) {
+  return current;
+}
+
+bool Trie::match(std::string word) {
+  auto character = word.begin();
+
+  if (!parent.children[*character - 'a']) {
+    return false;
+  }
+
+  TrieNode* current = parent.children[*character - 'a'];
+  character++;
+
+  if (character == word.end()) {
+    return true;
+  }
+
+  TrieNode* next;
+
+  while (character != word.end()) {
+    next = current->children[*character - 'a'];
+    if (!next) {
+      return false;
+    }
+    current = next;
+    character++;
+  }
+
+  if (current->isLeaf) {
     return current;
   }
 
-  return current; 
-
+  return false;
+  
 }
 
 std::vector<std::string> Trie::matchPrefix(std::string prefix) {
@@ -95,4 +122,44 @@ void Trie::findAll(TrieNode* current, std::string& prefix, std::vector<std::stri
       prefix.pop_back(); // Backtrack
     }
   }
+}
+
+void Trie::printTrie() {
+  std::vector<std::string> words;
+  std::string word;
+  for (int i = 0; i < chars; i++) {
+    if (parent.children[i] != nullptr) {      
+      word += parent.children[i]->data;
+      findAll(parent.children[i], word, words);
+      word.pop_back();
+    }
+  }
+  for (std::string word : words) {
+    std::cout << word << ' ';
+  }
+  std::cout << '\n';
+}
+
+void Trie::free(TrieNode* node) {
+
+  for (int i = 0; i < chars; i++) {
+    if (node->children[i] != nullptr) {      
+      free(node->children[i]);
+    }
+  }
+
+  for (int i = 0; i < chars; i++) {
+    TrieNode* temp = node->children[i];
+    delete temp;
+    node->children[i] = nullptr;
+  }
+  
+}
+
+void Trie::deleteTrie() {
+  free(&parent);
+}
+
+Trie::~Trie() {
+  free(&parent);
 }
