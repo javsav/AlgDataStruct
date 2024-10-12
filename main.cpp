@@ -1,83 +1,79 @@
-#include "Heap.tpp"
+// #include "Heap.tpp"
+// #include "kth_largest.cpp"
 
-int main() {
+// int main() {
   
-  std::vector<int> list = {9,8,7,6,5,4,3,2,1};
+//   std::vector<int> list = {9,8,7,6,5,4,3,2,1};
 
-  Heap<int> heap(list);
+//   Heap<int> heap(list);
 
-  heap.printHeap();
+//   heap.printHeap();
 
-  heap.remove(2);
+//   heap.remove(2);
 
-  heap.printHeap();
+//   heap.printHeap();
 
-  std::vector<int> unsorted = {9, 8, 7, 6, 2, 4, 5, 3, 2, 3, 11, 1, 1, 9, 9, 5, 4, 3, 2, 1};
+//   std::vector<int> unsorted = {9, 8, 7, 6, 2, 4, 5, 3, 2, 3, 11, 1, 1, 9, 9, 5, 4, 3, 2, 1};
 
-  std::vector<int> sortedVec = heap.heapSort(unsorted);
-
-  for (auto i = sortedVec.begin(); i != sortedVec.end(); ++i) {
-    std::cout << *i << ' ';
-  }
-  std::cout << '\n';
+//   std::cout << kth_largest(list, 12) << '\n';
 
 
 
-  // heap.insert(1);
+//   // heap.insert(1);
 
-  // heap.printHeap();
+//   // heap.printHeap();
 
-  // heap.insert(3);
+//   // heap.insert(3);
 
-  // heap.printHeap();
+//   // heap.printHeap();
 
-  // heap.insert(8);
+//   // heap.insert(8);
 
-  // heap.printHeap();
+//   // heap.printHeap();
 
-  // heap.printVector(heap);
+//   // heap.printVector(heap);
 
-  // heap.insert(12);
+//   // heap.insert(12);
 
-  // heap.printHeap();
+//   // heap.printHeap();
 
 
 
-  // heap.insert(7);
+//   // heap.insert(7);
 
-  // heap.insert(3);
+//   // heap.insert(3);
 
-  // heap.insert(9);
+//   // heap.insert(9);
 
-  // heap.insert(5);
+//   // heap.insert(5);
 
-  // heap.printHeap();
+//   // heap.printHeap();
 
-  // heap.insert(2);
+//   // heap.insert(2);
 
-  // heap.printHeap();
+//   // heap.printHeap();
 
-  // heap.insert(2);
+//   // heap.insert(2);
 
-  // heap.printHeap();
+//   // heap.printHeap();
 
-  // heap.insert(7);
+//   // heap.insert(7);
 
-  // heap.printHeap();
+//   // heap.printHeap();
 
-  // heap.insert(9);
+//   // heap.insert(9);
 
-  // heap.printHeap();
+//   // heap.printHeap();
 
-  // heap.insert(4);
+//   // heap.insert(4);
 
-  // heap.printHeap();
+//   // heap.printHeap();
 
-  // heap.insert(1);
+//   // heap.insert(1);
 
-  // heap.printHeap();
+//   // heap.printHeap();
 
-  // heap.remove(1);
+//   // heap.remove(1);
 
-  // heap.printHeap();
-}
+//   // heap.printHeap();
+// }
