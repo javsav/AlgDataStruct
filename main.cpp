@@ -1,4 +1,4 @@
-#include "Heap.cpp"
+#include "Heap.tpp"
 
 int main() {
   
@@ -11,6 +11,17 @@ int main() {
   heap.remove(2);
 
   heap.printHeap();
+
+  std::vector<int> unsorted = {9, 8, 7, 6, 2, 4, 5, 3, 2, 3, 11, 1, 1, 9, 9, 5, 4, 3, 2, 1};
+
+  std::vector<int> sortedVec = heap.heapSort(unsorted);
+
+  for (auto i = sortedVec.begin(); i != sortedVec.end(); ++i) {
+    std::cout << *i << ' ';
+  }
+  std::cout << '\n';
+
+
 
   // heap.insert(1);
 

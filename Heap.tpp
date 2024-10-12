@@ -41,7 +41,7 @@ class Heap {
   }
 
   // Function to balance new heap
-  void heapifie(heapIndex index) {
+  void heapifie(heapIndex index) {    
     if (index >= tree.size() - 1) {
       return;
     }
@@ -65,6 +65,28 @@ class Heap {
 
   }
 
+  // Function to assist with heapSort
+  void heapifieSubarray(heapIndex index, heapIndex end) {
+    if (index >= end) {
+      return;
+    }
+    int leftIndex = getLeftChildPosition(index);
+    int rightIndex = getRightChildPosition(index);
+    int min = index;
+
+    if (leftIndex < end && tree[leftIndex] < tree[min]) {
+      min = leftIndex;      
+    }
+    if (rightIndex < end && tree[rightIndex] < tree[min]) {
+      min = rightIndex;
+    }
+
+    if (min != index) {
+      std::swap(tree[min], tree[index]);
+      heapifieSubarray(min, end);
+    } 
+  }
+
   // Function to balance new heap up
   void hippifie(heapIndex index) {
     
@@ -81,26 +103,25 @@ class Heap {
   }
 
   // Function to maintain the min-heap property by swapping elements down the tree
-  heapIndex heapifyDown(heapIndex index) {
+  heapIndex heapifyDown(heapIndex index) {    
     if (index >= tree.size() - 1) {
-      return;
-    }
+      return this->tree.size();
+    }    
+
     heapIndex leftIndex = getLeftChildPosition(index);
     heapIndex rightIndex = getRightChildPosition(index);
+    heapIndex min = index;
 
-    if (leftIndex < tree.size() && tree[leftIndex] < tree[index]) {
-      std::swap(tree[index], tree[leftIndex]);
-      heapifyDown(leftIndex);
-      heapifyDown(index);
-    } else {
-      heapifyDown(leftIndex);
+    if (leftIndex < tree.size() && tree[leftIndex] < tree[min]) {
+      min = leftIndex;
     }
-    if (rightIndex < tree.size() && tree[rightIndex] < tree[index]) {
-      std::swap(tree[index], tree[rightIndex]);
-      heapifyDown(rightIndex);
-      heapifyDown(index);
-    } else {
-      heapifyDown(rightIndex);
+    if (rightIndex < tree.size() && tree[rightIndex] < tree[min]) {
+      min = rightIndex;
+    }
+
+    if (min != index) {
+      std::swap(tree[min], tree[index]);
+      return heapifyDown(min);
     }
 
     return this->tree.size();
@@ -117,7 +138,7 @@ class Heap {
   }
 
   // Constructor that builds a min-heap from an existing vector
-  Heap(std::vector<T> tree) {
+  Heap(std::vector<T>& tree) {
     this->heapify(tree);
   }
 
@@ -146,17 +167,17 @@ class Heap {
   }
 
   // Build a min-heap from an existing vector
-  void heapify(std::vector<T> tree) {
+  void heapify(std::vector<T>& tree) {
     // Insert a dummy element at the beginning to simplify calculations
     tree.insert(tree.begin(), (T)NULL);
 
     this->tree = tree;    
     
-    heapIndex root = 1;
-    // for (heapIndex i = root; i < tree.size(); i++) {
-    //   hippifie(i);
-    // }
-    heapifie(root);
+    //heapIndex root = 1;
+    
+    for (int i = (tree.size() / 2) - 1; i >= 1; i--) {
+      heapifyDown(i);
+    }
   }
 
   // Helper function to print the contents of a vector
@@ -197,20 +218,19 @@ class Heap {
   }
 
   // Sort a vector using the heap sort algorithm
-  std::vector<T> heapSort(std::vector<T> numList) {
-    Heap<T> tree1;
-    // Build a min-heap from the input vector
-    for (typename std::vector<T>::size_type index = 0; index < numList.size(); index++) {
-      tree1.insert(numList[index]);
+  std::vector<T> heapSort(std::vector<T>& numList) {
+    Heap<T> sorter(numList);
+    
+    heapIndex end = sorter.tree.size() - 1;
+    heapIndex i = 1;
+    while (end >= 2) {
+      std::swap(sorter.tree[i], sorter.tree[end]);
+      sorter.heapifieSubarray(i, end);      
+      end--;
     }
-
-    std::vector<T> sortedNumList;
-    // Extract the minimum elements one by one and add them to the sorted list
-    while (!tree1.isHeapEmpty()) {
-      sortedNumList.push_back(tree1.popTop());
-      this->printVector(sortedNumList);
-    }
-    return sortedNumList;
+    std::reverse(sorter.tree.begin(), sorter.tree.end());
+    sorter.tree.pop_back();
+    return sorter;
   }
 
   
