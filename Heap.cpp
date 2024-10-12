@@ -11,13 +11,15 @@
 #include <iostream>
 #include <limits>
 #include <vector>
+#include <cmath>
+#include <iomanip>
 
 template <typename T>
 class Heap {
  private:
   // Define an alias for the underlying data structure (vector) and its size type
   typedef std::vector<T> heap;
-  typedef heap::size_type heapIndex;
+  typedef typename heap::size_type heapIndex;
 
   // Internal storage for the heap elements
   heap tree;
@@ -38,28 +40,69 @@ class Heap {
     return (heapIndex)std::floor(i / 2);
   }
 
+  // Function to balance new heap
+  void heapifie(heapIndex index) {
+    if (index >= tree.size() - 1) {
+      return;
+    }
+    int leftIndex = getLeftChildPosition(index);
+    int rightIndex = getRightChildPosition(index);
+
+    if (leftIndex < tree.size() && tree[leftIndex] < tree[index]) {
+      std::swap(tree[index], tree[leftIndex]);
+      heapifie(leftIndex);
+      heapifie(index);
+    } else {
+      heapifie(leftIndex);
+    }
+    if (rightIndex < tree.size() && tree[rightIndex] < tree[index]) {
+      std::swap(tree[index], tree[rightIndex]);
+      heapifie(rightIndex);
+      heapifie(index);
+    } else {
+      heapifie(rightIndex);
+    }    
+
+  }
+
+  // Function to balance new heap up
+  void hippifie(heapIndex index) {
+    
+    int parentIndex = getParentPosition(index);
+    if (parentIndex == 0) {
+      return;
+    }
+    if (tree[parentIndex] > tree[index]) {
+      std::swap(tree[parentIndex], tree[index]);
+      hippifie(parentIndex);
+    } else {
+      hippifie(parentIndex);
+    }
+  }
+
   // Function to maintain the min-heap property by swapping elements down the tree
   heapIndex heapifyDown(heapIndex index) {
-    heapIndex leftChildIndex = this->getLeftChildPosition(index);
-    T leftChild = (leftChildIndex < this->tree.size()) ? this->tree.at(leftChildIndex) : std::numeric_limits<T>::min();
-
-    heapIndex rightChildIndex = this->getRightChildPosition(index);
-    T rightChild = (rightChildIndex < this->tree.size()) ? this->tree.at(rightChildIndex) : std::numeric_limits<T>::min();
-
-    // Find the child with the larger value
-    heapIndex minValueChildIndex = (leftChild < rightChild) ? leftChildIndex : rightChildIndex;
-
-    // If a child has a larger value, swap it with the parent and recursively heapify down
-    if (minValueChildIndex < this->tree.size()) {
-      if (this->tree.at(minValueChildIndex) < this->tree.at(index)) {
-        std::cout << "Swap positions " << minValueChildIndex << "(" << this->tree.at(minValueChildIndex) << ") and" << index << "(" << this->tree.at(index) << ")." << std::endl;
-        std::swap(this->tree.at(minValueChildIndex), this->tree.at(index));
-        // Recursively fix the heap property
-        this->heapifyDown(minValueChildIndex);
-        return minValueChildIndex;
-      }
+    if (index >= tree.size() - 1) {
+      return;
     }
-    // Reached a leaf node or no child has a larger value, return the current index
+    heapIndex leftIndex = getLeftChildPosition(index);
+    heapIndex rightIndex = getRightChildPosition(index);
+
+    if (leftIndex < tree.size() && tree[leftIndex] < tree[index]) {
+      std::swap(tree[index], tree[leftIndex]);
+      heapifyDown(leftIndex);
+      heapifyDown(index);
+    } else {
+      heapifyDown(leftIndex);
+    }
+    if (rightIndex < tree.size() && tree[rightIndex] < tree[index]) {
+      std::swap(tree[index], tree[rightIndex]);
+      heapifyDown(rightIndex);
+      heapifyDown(index);
+    } else {
+      heapifyDown(rightIndex);
+    }
+
     return this->tree.size();
   }
 
@@ -67,6 +110,10 @@ class Heap {
   // Default constructor - creates an empty heap with a dummy element at index 0
   Heap() {
     this->tree.push_back((T)NULL);
+  }
+
+  operator heap() {
+    return tree;
   }
 
   // Constructor that builds a min-heap from an existing vector
@@ -79,9 +126,23 @@ class Heap {
     return this->tree.size() <= 1;
   }
 
-  // Print the contents of the heap
+  // Print the contents of the heap in tree-like structure
   void printHeap() {
-    this->printVector(this->tree);
+    int powTwo = 0;
+    heapIndex index = 1;
+    int cumSum = 0;
+    while (index < tree.size()) {
+      std::cout << std::setw((tree.size() - (index) ) + ((tree.size() / pow(2, powTwo))/2+index));
+      while (cumSum < pow(2, powTwo) && index < tree.size()) {
+        std::cout << tree[index] << std::setw(((tree.size() - (powTwo / 2)) / (pow(2, powTwo)))) << ' ';
+        index++;
+        cumSum++;
+      }
+      std::cout << '\n';
+      cumSum = 0;
+      powTwo++;
+    }
+  std::cout << '\n';
   }
 
   // Build a min-heap from an existing vector
@@ -89,12 +150,13 @@ class Heap {
     // Insert a dummy element at the beginning to simplify calculations
     tree.insert(tree.begin(), (T)NULL);
 
-    this->tree = tree;
-
-    // Start from the last non-dummy element and work backwards to maintain the heap property
-    for (heapIndex index = this->tree.size() - 1; index >= 1; index--) {
-      this->heapifyDown(index);
-    }
+    this->tree = tree;    
+    
+    heapIndex root = 1;
+    // for (heapIndex i = root; i < tree.size(); i++) {
+    //   hippifie(i);
+    // }
+    heapifie(root);
   }
 
   // Helper function to print the contents of a vector
@@ -151,19 +213,56 @@ class Heap {
     return sortedNumList;
   }
 
-  // TO BE IMPLEMENTED
+  
   // Insert an element into the heap
   void insert(T element) {
+    this->tree.push_back(element);
+
+    heapIndex i = this->tree.size() - 1;
+
+    while (i != 0 && this->tree[getParentPosition(i)] > this->tree[i]) {
+      std::swap(this->tree[getParentPosition(i)], this->tree[i]);
+      i = getParentPosition(i);
+    }
   }
 
-  // TO BE IMPLEMENTED
   // Remove an element from the heap
   void remove(T value) {
+    heapIndex i = 1;
+
+    while (i < tree.size()) {
+      if (tree[i] == value) {
+        break;
+      }
+      i++;
+    }
+  
+    std::swap(tree[i], tree[tree.size() - 1]);
+    auto it = tree.begin();
+    std::advance(it, tree.size()-1);
+    tree.erase(it);
+    heapIndex leftChild = getLeftChildPosition(i);
+    heapIndex rightChild = getRightChildPosition(i);
+
+    if (tree[leftChild] < tree[rightChild]) {
+      while (leftChild < tree.size() && tree[i] > tree[leftChild]) {
+        std::swap(tree[i], tree[leftChild]);
+        i = leftChild;
+        leftChild = getLeftChildPosition(i);
+      }
+    } else {
+      while (rightChild < tree.size() && tree[i] > tree[rightChild]) {
+        std::swap(tree[i], tree[rightChild]);
+        i = rightChild;
+        rightChild = getRightChildPosition(i);
+      }
+    }
   }
 
   // TO BE IMPLEMENTED
   // Get the minimum element (in this case, the minimum element of the min-heap)
   T getMin() {
+    return tree[1];
   }
 };
 
