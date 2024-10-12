@@ -51,6 +51,10 @@
     "sstream": "cpp",
     "list": "cpp",
     "chrono": "cpp",
-    "ratio": "cpp"
+    "ratio": "cpp",
+    "stop_token": "cpp",
+    "thread": "cpp",
+    "unordered_set": "cpp",
+    "set": "cpp"
   }
 }
