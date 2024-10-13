@@ -265,7 +265,6 @@ class Heap {
     }
   }
 
-  // TO BE IMPLEMENTED
   // Get the minimum element (in this case, the minimum element of the min-heap)
   T getMin() {
     return tree[1];
