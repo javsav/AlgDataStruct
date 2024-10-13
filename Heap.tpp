@@ -87,20 +87,6 @@ class Heap {
     } 
   }
 
-  // Function to balance new heap up
-  void hippifie(heapIndex index) {
-    
-    int parentIndex = getParentPosition(index);
-    if (parentIndex == 0) {
-      return;
-    }
-    if (tree[parentIndex] > tree[index]) {
-      std::swap(tree[parentIndex], tree[index]);
-      hippifie(parentIndex);
-    } else {
-      hippifie(parentIndex);
-    }
-  }
 
   // Function to maintain the min-heap property by swapping elements down the tree
   heapIndex heapifyDown(heapIndex index) {    
