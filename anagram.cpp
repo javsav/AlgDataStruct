@@ -10,6 +10,7 @@
 #include <unordered_map>
 #include <unordered_set>
 #include <vector>
+#include "nqueens2.cpp"
 
 double anagramHash(std::string& str) {
   static constexpr int primes[26] = {2, 67, 23, 47, 3, 73, 71, 61, 5, 29, 31, 37, 41, 43, 7, 53, 59, 19, 13, 17, 11, 79, 83, 89, 97, 101};
@@ -57,7 +58,7 @@ std::vector<std::vector<std::string>> groupAnagrams2(std::vector<std::string>& s
 
 int main() {
   std::vector<std::string> strs = {"eat", "tea", "tan", "ate", "nat", "bat"};
-  int n = 100000;
+  int n = 1000;
   
   using std::chrono::duration;
   using std::chrono::duration_cast;
@@ -66,7 +67,7 @@ int main() {
 
   auto t1 = high_resolution_clock::now();
   for (int i = 0; i < n; i++) {
-    std::vector<std::vector<std::string>> anagrams = groupAnagrams(strs);
+    std::vector<std::vector<std::string>> answers = solveNQueens(5);
   }
   auto t2 = high_resolution_clock::now();
 

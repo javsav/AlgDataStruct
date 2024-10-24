@@ -1,11 +1,10 @@
-#include <vector>
-#include <iostream>
 #include <bits/stdc++.h>
 
-bool checkBoard(void* board, int r, int c, int n) {
-  int(*b)[n][n] = (int(*)[n][n])board;
+#include <iostream>
+#include <vector>
 
-  if ((*b)[r][c] == true) {
+bool checkBoard(int* board, int r, int c, int n) {
+   if (*((board + (r) * n) + (c)) == true) {
     return false;
   }
 
@@ -14,7 +13,7 @@ bool checkBoard(void* board, int r, int c, int n) {
     if (i == r) {
       continue;
     }
-    if ((*b)[i][c] == true) {
+    if (*((board + (i)*n) + (c)) == true) {
       return false;
     }
   }
@@ -23,35 +22,35 @@ bool checkBoard(void* board, int r, int c, int n) {
     if (i == c) {
       continue;
     }
-    if ((*b)[r][i] == true) {
+    if (*((board + (r)*n) + (i)) == true) {
       return false;
     }
   }
 
   // Check DDR
   for (int i = 1; i + r < n && c + i < n; i++) {
-    if ((*b)[i + r][c + i] == true) {
+    if (*((board + (i+r)*n) + (c+i)) == true) {
       return false;
     }
   }
 
   // Check DDL
   for (int i = 1; i + r < n && c - i >= 0; i++) {
-    if ((*b)[i + r][c - i] == true) {
+    if (*((board + (i + r) * n) + (c - i)) == true) {
       return false;
     }
   }
 
   // Check DUR
   for (int i = 1; r - i >= 0 && c + i < n; i++) {
-    if ((*b)[r - i][c + i] == true) {
+    if (*((board + (r-i) * n) + (c + i)) == true) {
       return false;
     }
   }
 
   // Check DUL
   for (int i = 1; r - i >= 0 && c - i >= 0; i++) {
-    if ((*b)[r - i][c - i] == true) {
+    if (*((board + (r-i) * n) + (c-i)) == true) {
       return false;
     }
   }
@@ -59,13 +58,12 @@ bool checkBoard(void* board, int r, int c, int n) {
   return true;
 }
 
-bool updateBoard(void* board, int r, int c, int n) {
-  int(*b)[n][n] = (int(*)[n][n])board;
+bool updateBoard(int* board, int r, int c, int n) { 
 
-  if ((*b)[r][c] == true) {
+  if (*((board + (r)*n) + (c)) == true) {    
     return false;
   } else {
-    (*b)[r][c] = true;
+    *((board + (r)*n) + (c)) = true;
   }
 
   // Check row
@@ -73,10 +71,10 @@ bool updateBoard(void* board, int r, int c, int n) {
     if (i == r) {
       continue;
     }
-    if ((*b)[i][c] == true) {
+    if (*((board + (i)*n) + (c)) == true) {
       return false;
     } else {
-      (*b)[i][c] = 2;
+      *((board + (i)*n) + (c)) = 2;
     }
   }
   // Check column
@@ -84,158 +82,117 @@ bool updateBoard(void* board, int r, int c, int n) {
     if (i == c) {
       continue;
     }
-    if ((*b)[r][i] == true) {
+    if (*((board + (r)*n) + (i)) == true) {
       return false;
     } else {
-      (*b)[r][i] = 2;
+      *((board + (r)*n) + (i)) = 2;
     }
   }
 
   // Check DDR
   for (int i = 1; i + r < n && c + i < n; i++) {
-    if ((*b)[i + r][c + i] == true) {
+    if (*((board + (i+r)*n) + (c+i)) == true) {
       return false;
     } else {
-      (*b)[i + r][c + i] = 2;
+      *((board + (i + r) * n) + (c + i)) = 2;
     }
   }
 
   // Check DDL
   for (int i = 1; i + r < n && c - i >= 0; i++) {
-    if ((*b)[i + r][c + i] == true) {
+    if (*((board + (i + r) * n) + (c - i)) == true) {
       return false;
     } else {
-      (*b)[i + r][c - i] = 2;
+      *((board + (i + r) * n) + (c - i)) = 2;
     }
   }
 
   // Check DUR
   for (int i = 1; r - i >= 0 && c + i < n; i++) {
-    if ((*b)[r - i][c + i] == true) {
+    if (*((board + (r -i) * n) + (c + i)) == true) {
       return false;
     } else {
-      (*b)[r - i][c + i] = 2;
+      *((board + (r - i) * n) + (c + i)) = 2;
     }
   }
 
   // Check DUL
   for (int i = 1; r - i >= 0 && c - i >= 0; i++) {
-    if ((*b)[r - i][c - i] == true) {
+    if (*((board + (r - i) * n) + (c - i)) == true) {
       return false;
     } else {
-      (*b)[r - i][c - i] = 2;
+      *((board + (r - i) * n) + (c - i)) = 2;
     }
   }
 
   return true;
 }
 
-bool undoBoard(void* board, int r, int c, int n) {
-  int(*b)[n][n] = (int(*)[n][n])board;
+bool undoBoard(int* board, int r, int c, int n) {
   // Check row
-  (*b)[r][c] = 0;
+  *((board + r * n) + c) = 0;
   for (int i = 0; i < n; i++) {
     if (i == r) {
       continue;
     }
-    if (!checkBoard((*b), i, c, n)) {
-      continue;
-    } else {
-      (*b)[i][c] = 0;
-    }
+    // if (!checkBoard((int*)board, i, c, n)) {
+    //   continue;
+    // } else {
+      *((board + i * n) + c) = 0;
+    //}
   }
   // Check column
   for (int i = 0; i < n; i++) {
     if (i == c) {
       continue;
     }
-    if (!checkBoard((*b), r, i, n)) {
-      continue;
-    } else {
-      (*b)[r][i] = 0;
-    }
+    // if (!checkBoard((int*)board, r, i, n)) {
+    //   continue;
+    // } else {
+      *((board + r * n) + i) = 0;
+    //}
   }
 
   // Check DDR
   for (int i = 1; i + r < n && c + i < n; i++) {
-    if (!checkBoard((*b), i + r, c + i, n)) {
-      continue;
-    } else {
-      (*b)[i + r][c + i] = 0;
-    }
+    // if (!checkBoard((int*)board, i + r, c + i, n)) {
+    //   continue;
+    // } else {
+      *((board + (i + r) * n) + (c + i)) = 0;      
+   // }
   }
 
   // Check DDL
   for (int i = 1; i + r < n && c - i >= 0; i++) {
-    if (!checkBoard((*b), i + r, c - i, n)) {
-      continue;
-    } else {
-      (*b)[i + r][c - i] = 0;
-    }
+    // if (!checkBoard((int*)board, i + r, c - i, n)) {
+    //   continue;
+    // } else {
+      *((board + (i+r) * n) + (c-i)) = 0;      
+    //}
   }
 
   // Check DUR
   for (int i = 1; r - i >= 0 && c + i < n; i++) {
-    if (!checkBoard((*b), r - i, c + i, n)) {
-      continue;
-    } else {
-      (*b)[r - i][c + i] = 0;
-    }
+    // if (!checkBoard((int*)board, r - i, c + i, n)) {
+    //   continue;
+    // } else {
+      *((board + (r - i) * n) + (c + i)) = 0;
+    //}
   }
 
   // Check DUL
   for (int i = 1; r - i >= 0 && c - i >= 0; i++) {
-    if (!checkBoard((*b), r - i, c - i, n)) {
-      continue;
-    } else {
-      (*b)[r - i][c - i] = 0;
-    }
+    // if (!checkBoard((int*)board, r - i, c - i, n)) {
+    //   continue;
+    // } else {
+      *((board + (r - i) * n) + (c - i)) = 0;
+    //}
   }
 
   return true;
 }
 
-bool solve(void* board, int n, int row, std::vector<std::string>& answer, std::vector<std::vector<std::string>>& answers) {
-  int(*b)[n][n] = (int(*)[n][n])board;
-  if (row == n) {
-    answers.push_back(answer);
-    return true;
-  }
-
-  for (int i = 0; i < n; i++) {
-    if ((*b)[row][i] == 0) {
-      if (checkBoard((*b), row, i, n) == true) {
-        updateBoard((*b), row, i, n);
-        answer[row][i] = 'Q';        
-        solve((*b), n, row + 1, answer, answers);
-        undoBoard((*b), row, i, n);
-        answer[row][i] = '.';        
-      }
-    }
-  }
-  return false;
-}
-
-std::vector<std::vector<std::string>> solveNQueens(int n) {
-  int board[n][n];
-  int (*b)[n][n] = (int(*)[n][n])board;
-  std::memset(board, 0, sizeof board);
-  int pieces = n;
-
-  std::string row;
-  row.reserve(n);
-  for (int i = 0; i < n; i++) {
-    row += '.';
-  }
-  std::vector<std::string> answer (n, row);
-
-  std::vector<std::vector<std::string>> answers (n);
-  solve((*b), n, 0, answer, answers);
-
-  return answers;
-}
-
-void printBoards(void* board, int n, std::vector<std::string>& answer) {
+void printBoards(int* board, int n, std::vector<std::string>& answer) {
   int(*b)[n][n] = (int(*)[n][n])board;
   for (int i = 0; i < n; i++) {
     for (int j = 0; j < n; j++) {
@@ -250,15 +207,68 @@ void printBoards(void* board, int n, std::vector<std::string>& answer) {
   std::cout << '\n';
 }
 
-int main() {
-  solveNQueens(5);
+bool solve(int* board, int n, int row, std::vector<std::string>& answer, std::vector<std::vector<std::string>>& answers, std::vector<std::pair<int, int>> positions) {
+  
+  if (row == n) {
+    answers.push_back(answer);
+    return true;
+  }
+
+  for (int i = 0; i < n; i++) {
+    if (*((board + row * n) + i) == 0) {
+      if (checkBoard((int*)board, row, i, n) == true) {
+        updateBoard((int*)board, row, i, n);
+        answer[row][i] = 'Q';
+        positions.emplace_back(row, i);
+        solve((int*)board, n, row + 1, answer, answers, positions);
+        positions.pop_back();
+        undoBoard((int*)board, row, i, n);
+        for (auto pos:positions) {          
+          updateBoard((int*)board, pos.first, pos.second, n);
+        }
+        answer[row][i] = '.';
+      }
+    }
+  }
+  return false;
 }
+
+std::vector<std::vector<std::string>> solveNQueens(int n) {
+  int board[n][n]; 
+  std::memset(board, 0, sizeof board);
+
+  std::string row;
+  row.reserve(n);
+  for (int i = 0; i < n; i++) {
+    row += '.';
+  }
+  std::vector<std::string> answer(n, row);
+  std::vector<std::pair<int, int>> positions;
+  positions.reserve(n*n);
+  std::vector<std::vector<std::string>> answers;
+  answers.reserve(n);
+  solve((int*)board, n, 0, answer, answers, positions);
+
+  return answers;
+}
+
+
+
+// int main() {
+//   std::vector<std::vector<std::string>> answers = solveNQueens(4);
+//   for (auto vec:answers) {
+//     for (auto str:vec) {
+//       std::cout << str << '\n';
+//     }
+//     std::cout << '\n';
+//   }
+// }
 
 // for (int i = 0; i < n; i++) {
 //   for (int j = 0; j < n; j++) {
 //     if ((*b)[i][j] == false) {
-//       if (checkBoard((*b), i, j, n) == true) {
-//         updateBoard((*b), i, j, n);
+//       if (checkBoard((int*)board, i, j, n) == true) {
+//         updateBoard((int*)board, i, j, n);
 //         answer[i][j] = 'Q';
 //         //pieces--;
 //         std::cout << "placed" << '\n';
@@ -278,13 +288,13 @@ int main() {
 //         }
 //         std::cout << '\n';
 //         //std::cin.get();
-//         (solve((*b), n, pieces - 1, answer, answers) && pieces == 1);
+//         (solve((int*)board, n, pieces - 1, answer, answers) && pieces == 1);
 //           //std::cout << "TEST\n";
 //           //answers.push_back(answer);
 //           //return true;
 //         // } else {
 //           // std::cout << "removed 1, i: " << i << ", j:" << j << "\n";
-//           undoBoard((*b), i, j, n);
+//           undoBoard((int*)board, i, j, n);
 //           //pieces++;
 //           answer[i][j] = '.';
 //           // for (int i = 0; i < n; i++) {
@@ -321,7 +331,7 @@ int main() {
 //       // std::cin.get();
 
 //     }
-//     // undoBoard((*b), i, j, n);
+//     // undoBoard((int*)board, i, j, n);
 //     // pieces++;
 //   }
 
@@ -333,7 +343,7 @@ int main() {
 // //answers.push_back(answer);
 // return true;
 
-// checkBoard((*b), 0, 0, n);
+// checkBoard((int*)board, 0, 0, n);
 // for (int i = 0; i < n; i++) {
 //   for (int j = 0; j < n; j++) {
 //     std::cout << (*b)[i][j] << ' ';
@@ -341,7 +351,7 @@ int main() {
 //   std::cout << '\n';
 // }
 // std::cout << '\n';
-// checkBoard((*b), 1, 2, n);
+// checkBoard((int*)board, 1, 2, n);
 // for (int i = 0; i < n; i++) {
 //   for (int j = 0; j < n; j++) {
 //     std::cout << (*b)[i][j] << ' ';
@@ -349,7 +359,7 @@ int main() {
 //   std::cout << '\n';
 // }
 // std::cout << '\n';
-// checkBoard((*b), 3, 1, n);
+// checkBoard((int*)board, 3, 1, n);
 // for (int i = 0; i < n; i++) {
 //   for (int j = 0; j < n; j++) {
 //     std::cout << (*b)[i][j] << ' ';
@@ -357,7 +367,7 @@ int main() {
 //   std::cout << '\n';
 // }
 // std::cout << '\n';
-// undoBoard((*b), 3, 1, n);
+// undoBoard((int*)board, 3, 1, n);
 // for (int i = 0; i < n; i++) {
 //   for (int j = 0; j < n; j++) {
 //     std::cout << (*b)[i][j] << ' ';
@@ -365,7 +375,7 @@ int main() {
 //   std::cout << '\n';
 // }
 // std::cout << '\n';
-// undoBoard((*b), 1, 2, n);
+// undoBoard((int*)board, 1, 2, n);
 // for (int i = 0; i < n; i++) {
 //   for (int j = 0; j < n; j++) {
 //     std::cout << (*b)[i][j] << ' ';
@@ -373,7 +383,7 @@ int main() {
 //   std::cout << '\n';
 // }
 // std::cout << '\n';
-// undoBoard((*b), 0, 0, n);
+// undoBoard((int*)board, 0, 0, n);
 // for (int i = 0; i < n; i++) {
 //   for (int j = 0; j < n; j++) {
 //     std::cout << (*b)[i][j] << ' ';
