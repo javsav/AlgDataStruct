@@ -23,6 +23,7 @@ class BinarySearchTree {
   void insert(std::initializer_list<T> args);
   int getParent(T value);
   TreeNode<T>* getNode(T value);
+  void deleteNode(T value);
 };
 
 #endif // BINARYSEARCHTREE_H

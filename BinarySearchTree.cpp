@@ -185,3 +185,12 @@ int BinarySearchTree<T>::getParent(T value) {
     
     return nullptr;
   }
+
+template <class T>
+void BinarySearchTree<T>::deleteNode(T value) {
+  TreeNode<T>* delNode = getNode(value);
+
+  if (delNode->leftChild == nullptr && delNode->rightChild == nullptr) {
+    
+  }
+}
