@@ -1,18 +1,25 @@
 #include "TreeNode.h"
 
-template <typename T>
-TreeNode<T>::TreeNode(T data, TreeNode* l, TreeNode* r, bool colour) : data(data), leftChild(l), rightChild(r), isRed(colour) {}
-
-template <typename T>
-TreeNode<T>::TreeNode(T data, TreeNode* l, TreeNode* r) : TreeNode::TreeNode(data, l, r, true) {}
-
-template <typename T>
-TreeNode<T>::TreeNode(T data, bool colour) : TreeNode::TreeNode(data, nullptr, nullptr, colour) {}
-
-template <typename T>
-TreeNode<T>::TreeNode(T data) : TreeNode::TreeNode(data, nullptr, nullptr, true) {
+template <class T>
+TreeNode<T>::TreeNode(T data, TreeNode* parent, TreeNode* l, TreeNode* r) : data(data), parent(parent), leftChild(l), rightChild(r) {
 }
 
-template <typename T>
-TreeNode<T>::TreeNode() : data(), leftChild(nullptr), rightChild(nullptr), isRed(true) {
+template <class T>
+TreeNode<T>::TreeNode(T data, TreeNode* l, TreeNode* r) : data(data), leftChild(l), rightChild(r), parent(nullptr) {
+}
+
+template <class T>
+TreeNode<T>::TreeNode(T data) : data(data), leftChild(nullptr), rightChild(nullptr), parent(nullptr) {
+}
+
+template <class T>
+TreeNode<T>::TreeNode() : data(), leftChild(nullptr), rightChild(nullptr), parent(nullptr) {
+}
+
+template <class T>
+TreeNode<T>::TreeNode(T data, TreeNode<T>* parent) : data(data), parent(parent) {}
+
+template <class T>
+void TreeNode<T>::setParent(TreeNode<T>* node) {
+  this->parent = node;
 }
