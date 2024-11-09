@@ -4,6 +4,8 @@
 #include <iomanip>
 #include <algorithm>
 #include <queue>
+#include <cmath>
+
 template <typename T>
 void RedBlackTree<T>::inOrderPrint(RBTNode<T>* node) {
   if (node->leftChild != nullptr) {
@@ -41,6 +43,11 @@ void RedBlackTree<T>::postOrderPrint(RBTNode<T>* node) {
 }
 
 template <typename T>
+RedBlackTree<T>::RedBlackTree() {
+  root = nullptr;
+}
+
+template <typename T>
 RedBlackTree<T>::RedBlackTree(std::vector<int> list) {
   std::sort(list.begin(), list.end());
 
@@ -52,8 +59,11 @@ RedBlackTree<T>::RedBlackTree(std::vector<int> list) {
   int lMid = (start + mid - 1) / 2;
   //RBTNode* current = this->root;
   root = new RBTNode<T>(list[mid]);
+  m_size++;
   root->leftChild = new RBTNode<T>(list[lMid], root);
+  m_size++;
   root->rightChild = new RBTNode<T>(list[rMid], root);
+  m_size++;
   populate(root->leftChild, list, start, mid - 1);
   populate(root->rightChild, list, mid + 1, end);
 }
@@ -68,13 +78,17 @@ void RedBlackTree<T>::populate(RBTNode<T>* current, std::vector<int>& list, int 
   int lMid = start + ((mid - 1 - start) / 2);
   if ((mid == rMid)) {
     current->leftChild = new RBTNode<T>(list[lMid], current, true);
+    m_size++;
     return;
   } else if ((mid == lMid)) {
     current->rightChild = new RBTNode<T>(list[rMid], current, true);
+    m_size++;
     return;
   }
   current->leftChild = new RBTNode<T>(list[lMid], current);
+  m_size++;
   current->rightChild = new RBTNode<T>(list[rMid], current);
+  m_size++;
   populate(current->leftChild, list, start, mid - 1);
   populate(current->rightChild, list, mid + 1, end);
 }
@@ -135,6 +149,124 @@ void RedBlackTree<T>::printByLevel() {
 }
 
 template <typename T>
+void RedBlackTree<T>::printAsTree() {
+  int o_size = m_size;
+  std::queue<int> nils;
+  bool hasNils = false;
+  int powTwo = 0;
+  int index = 1;
+  int nilSum = 0;
+  std::queue<RBTNode<T>*> nodes;
+  std::cout << std::setw((o_size - (index) ) + ((o_size * 1.1 / pow(2, powTwo))));
+  nodes.push(root);
+  RBTNode<T>* current = nullptr;
+  RBTNode<T>* levelParent = root;
+  while (!nodes.empty()) {
+    current = nodes.front();
+    while (nodes.front() == nullptr) {
+      hasNils = true;
+      std::cout << "N" << std::setw(((o_size - (powTwo / 2)) / (pow(2, powTwo)))) << ' ';
+      //index++;      
+      nils.push(true);
+      nodes.pop();
+      if (!nodes.empty()) {
+        current = nodes.front();
+      } else {
+        return;
+      }      
+    }
+    
+  nodes.pop();  
+  std::cout << current->data << ((current->isRed) ? "R" : "B") << std::setw(((o_size - (powTwo / 2)) / (pow(2, powTwo)))) << ' ';
+  if (hasNils && current->leftChild == nullptr && current->rightChild == nullptr) {
+    nils.push(false);
+  } else if ((hasNils && current->leftChild != nullptr) || (hasNils && current->rightChild != nullptr)) {
+    nils.push(2);
+  }
+  index++;
+  
+  
+  if (current == root) {
+    std::cout << "\n";
+    std::cout << std::setw((o_size - (index) ) + ((o_size / pow(2, powTwo))/2+index));
+  }
+  if (current == levelParent->rightChild) {
+    std::cout << '\n';    
+    powTwo++;
+    if (!hasNils) {
+      std::cout << std::setw((o_size - (index) ) + ((o_size / pow(2, powTwo))/2+index));
+    } else {
+      std::cout << std::setw((o_size - (index) ) + ((o_size / pow(2, powTwo))/2+index));
+    }
+    
+    if (hasNils) {
+      
+      while (!nils.empty()) {
+        if (nils.front() == true) {
+          if (nodes.empty()) {
+            return;
+          }
+          std::cout << "" << std::setw(((o_size - (powTwo / 2)) / (pow(2, powTwo)))) << ' ';
+          o_size++;
+          std::cout << "" << std::setw(((o_size - (powTwo / 2)) / (pow(2, powTwo)))) << ' ';
+          o_size++;
+        } else if (nils.front() == 0) {
+          if (nodes.empty()) {
+            return;
+          }
+          std::cout << "N" << std::setw(((o_size - (powTwo / 2)) / (pow(2, powTwo)))) << ' ';
+          o_size++;
+          std::cout << "N" << std::setw(((o_size - (powTwo / 2)) / (pow(2, powTwo)))) << ' ';
+          o_size++;
+          if (nodes.front() == nullptr) {            
+            nodes.pop();
+            if (nodes.front() == nullptr) {
+              nodes.pop();
+            }
+            nils.pop();
+            continue;
+          } else {
+            nils.pop();
+            //std::cout << nodes.front()->data << std::setw(((m_size - (powTwo / 2)) / (pow(2, powTwo)))) << ' ';
+            continue;
+          }
+          
+        }
+        // } else if (nils.front() == 2) {
+        //   if (current->leftChild != nullptr) {
+        //     //std::cout << current->leftChild->data << ((current->leftChild->isRed) ? "R" : "B") << std::setw(((m_size - (powTwo / 2)) / (pow(2, powTwo)))) << ' ';
+        //   } else if (current->rightChild != nullptr) {
+        //     //std::cout << current->rightChild->data << ((current->leftChild->isRed) ? "R" : "B") << std::setw(((m_size - (powTwo / 2)) / (pow(2, powTwo)))) << ' ';
+        //   }
+          
+        // }
+        
+        nils.pop();
+      }
+    }
+    levelParent = current;
+  } else if (hasNils && current == levelParent->leftChild && levelParent->rightChild == nullptr) {
+    std::cout << "N" << std::setw(((m_size - (powTwo / 2)) / (pow(2, powTwo)))) << ' ';
+    nodes.pop();
+    std::cout << '\n';
+    std::cout << std::setw((m_size - (index) ) + ((m_size / pow(2, powTwo))/2+index));
+    powTwo++;
+  }
+  
+    
+  nodes.push(current->leftChild);
+
+
+  nodes.push(current->rightChild);
+
+}
+std::cout << '\n';
+
+}
+
+
+
+template <typename T>
 void RedBlackTree<T>::insert(T key) {
   if (root == nullptr) {
     root = new RBTNode<T>(key);
@@ -150,30 +282,35 @@ void RedBlackTree<T>::insert(T key) {
     return;
   }
   bool isLeft = false;
-  while (current != nullptr) {
-    if (key > current->data) {
-      if (current->rightChild) {
-      current = current->rightChild;
+  if (current) {
+    while (current != nullptr) {
+      if (key > current->data) {
+        if (current->rightChild) {
+          current = current->rightChild;
+        } else {
+          parent = current;
+          current = current->rightChild;
+          break;
+        }
+      } else if (key < current->data) {
+        if (current->leftChild) {
+          current = current->leftChild;
+        } else {
+          isLeft = true;
+          parent = current;
+          current = current->leftChild;
+          break;
+        }
       } else {
-        parent = current;
-        current = current->rightChild;
-        break;
+        return;
       }
-    } else if (key < current->data) {
-      if (current->leftChild) {
-      current = current->leftChild;
-      } else {
-        isLeft = true;
-        parent = current;
-        current = current->leftChild;
-        break;
-      }
-    } else {
-      return;
     }
-    
+  } else {
+    parent = root;
   }
+  
   current = new RBTNode<T>(key, parent, true);
+  m_size++;
   if (isLeft) {
     parent->leftChild = current;
   } else {

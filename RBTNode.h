@@ -20,9 +20,38 @@ struct NodeData {
   T key;
   U data;
   NodeData(T val) : key(val), data() {}
+  NodeData(T key, U data) : key(key), data(data) {}
   NodeData& operator=(T value) {
       key = value;  // Assign to key by default
       return *this;
+    }
+    NodeData& operator=(NodeData& value) {
+      key = value->key;  // Assign to key by default
+      return *this;
+    }
+    bool operator<(T value) {
+      return key < value;
+    }
+    bool operator<(NodeData& value) {
+      return this->key < value.key;
+      
+    }
+    bool operator>(T value) {
+      return this->key > value;
+    }
+
+    bool operator>(NodeData& value) {
+     return this->key > value.key;
+    }
+    bool operator==(T value) {
+      return value == key;
+    }
+    bool operator==(NodeData& value) {
+      if (value.key == this->key) {
+        return true;
+      } else {
+        return false;
+      }
     }
   friend std::ostream& operator<<(std::ostream& os, const NodeData& obj) {    
     os << obj.key << ":" << obj.data;
