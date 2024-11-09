@@ -1,6 +1,7 @@
 #ifndef REDBLACKTREE_CPP
 #define REDBLACKTREE_CPP
 #include "RedBlackTree.h"
+#include <iomanip>
 #include <algorithm>
 #include <queue>
 template <typename T>
@@ -103,6 +104,7 @@ void RedBlackTree<T>::printByLevel() {
   while (!nodes.empty()) {
     current = nodes.front();
     while (current == nullptr) {
+      std::cout << std::setw(6) << "NI " << std::setw(6);
       nodes.pop();
       if (!nodes.empty()) {
         current = nodes.front();
@@ -112,8 +114,8 @@ void RedBlackTree<T>::printByLevel() {
     }
     
     nodes.pop();
-    
-    std::cout << current->data;
+
+    std::cout << std::setw(2) << current->data << std::setw(2);
     if (current->isRed) {
       std::cout << "(R)" << ' ';
     } else {
@@ -125,15 +127,9 @@ void RedBlackTree<T>::printByLevel() {
     if (current == levelParent->rightChild) {
       std::cout << '\n';
       levelParent = current;
-    }
-    //if (current->leftChild != nullptr) {
-      // std::cout << "L " << current->leftChild->data << "   ";
-      nodes.push(current->leftChild);
-    //}
-    //if (current->leftChild != nullptr) {
-      // std::cout << "R " << current->rightChild->data << "   ";
-      nodes.push(current->rightChild);
-    //}       
+    }  
+    nodes.push(current->leftChild);
+    nodes.push(current->rightChild);         
   }
   std::cout << '\n';
 }
@@ -144,8 +140,8 @@ void RedBlackTree<T>::insert(T key) {
     root = new RBTNode<T>(key);
     return;
   }
-  RBTNode<T>* current;
-  RBTNode<T>* parent;
+  RBTNode<T>* current = nullptr;
+  RBTNode<T>* parent = nullptr;
   if (key > root->data) {
     current = root->rightChild;
   } else if (key < root->data) {
@@ -183,23 +179,29 @@ void RedBlackTree<T>::insert(T key) {
   } else {
     parent->rightChild = current;
   }
+  
+  if (current->parent->parent == nullptr) {
+    return;
+  }
+  
+  fixInsert(current);
 }
 
 template <typename T>
 void RedBlackTree<T>::leftRotate(RBTNode<T>* x) {
   RBTNode<T>* y = x->rightChild;
   x->rightChild = y->leftChild;
-  if (y->leftChild) {
+  if (y->leftChild != nullptr) {
     y->leftChild->parent = x;
   }
-  if (!x->parent) {
-    root = y;
-  } else if (x->parent->rightChild == x) {
-    x->parent->rightChild = y;
-  } else if (x->parent->leftChild == x) {
-    x->parent->leftChild = y;
-  }
   y->parent = x->parent;
+  if (x->parent == nullptr) {
+    root = y;
+  } else if (x == x->parent->rightChild) {
+    x->parent->rightChild = y;
+  } else if (x == x->parent->leftChild) {
+    x->parent->leftChild = y;
+  }  
   x->parent = y;
   y->leftChild = x;
 }
@@ -208,35 +210,78 @@ template <typename T>
 void RedBlackTree<T>::rightRotate(RBTNode<T>* x) {
   RBTNode<T>* y = x->leftChild;
   x->leftChild = y->rightChild;
-  if (y->rightChild) {
+  if (y->rightChild != nullptr) {
     y->rightChild->parent = x;
   }
-  if (!x->parent) {
-    root = y;
-  } else if (x->parent->rightChild == x) {
-    x->parent->rightChild = y;
-  } else if (x->parent->leftChild == x) {
-    x->parent->leftChild = y;
-  }
   y->parent = x->parent;
+  if (x->parent == nullptr) {
+    root = y;
+  } else if (x == x->parent->rightChild) {
+    x->parent->rightChild = y;
+  } else if (x == x->parent->leftChild) {
+    x->parent->leftChild = y;
+  }  
   x->parent = y;
   y->rightChild = x;
 }
 
 template <typename T>
-void RedBlackTree<T>::fixInsert(RBTNode<T>* k) {
-  // While k is not the root and k's parent is RED
-  while (k != root && k->parent->isRed) {
+void RedBlackTree<T>::fixInsert(RBTNode<T>* k) {  
+  
+  while (k != nullptr && k != root && k->parent != nullptr && k->parent->isRed) {    
     // If k's parent is the left subchild of its parent
-    if (k->parent == k->parent->parent->leftChild) {
+    if (k->parent->parent->leftChild != nullptr && k->parent == k->parent->parent->leftChild) {      
       // Create pointer to uncle (right subchild of k's grandparent)
       RBTNode<T>* uncle = k->parent->parent->rightChild;
       // If uncle is RED
-      if (uncle->isRed) {
-        
-      } 
+      if (uncle != nullptr && uncle->isRed) {
+        // Set parent and uncle to black and grandparent to red
+        k->parent->isRed = false;
+        uncle->isRed = false;
+        k->parent->parent->isRed = true;
+        // Update k to it's grandparent
+        k = k->parent->parent;
+        // Else if uncle is BLACK
+      } else {
+        // If k is it's parent's right child
+        if (k == k->parent->rightChild) {
+          // Set k to its parent and left rotate
+          k = k->parent;
+          leftRotate(k);
+        }
+        // Set k's parent to BLACK and k's grandparent to RED, then right rotate k's grandparent
+        k->parent->isRed = false;
+        k->parent->parent->isRed = true;
+        rightRotate(k->parent->parent);
+      }
+      // Else if k's parent is their grandparent's right child     
+    } else {      
+      RBTNode<T>* uncle = k->parent->parent->leftChild;
+      // If uncle is red
+      if (uncle != nullptr && uncle->isRed) {
+        // Set parent and uncle to black and grandparent to red
+        k->parent->isRed = false;
+        uncle->isRed = false;
+        k->parent->parent->isRed = true;
+        // Set k to k's grandparent
+        k = k->parent->parent;
+        // Else if uncle is black
+      } else {
+        // If k is k's parent's left child
+        if (k == k->parent->leftChild) {
+          // Set k to k's parent and right rotate
+          k = k->parent;
+          rightRotate(k);
+        }
+        // Set k's parent to BLACK and k's grandparent to RED then left rotate k's grandparent
+        k->parent->isRed = false;
+        k->parent->parent->isRed = true;
+        leftRotate(k->parent->parent);
+      }
     }
   }
+  // Ensure that root is black
+  root->isRed = false;
 }
 
 template <typename T>
