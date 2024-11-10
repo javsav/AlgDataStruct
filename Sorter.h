@@ -12,4 +12,6 @@ class Sorter {
    void heapifyDown(size_t i, std::vector<int>& list, size_t end);
    void qSort(std::vector<int>& list, int start, int end);
    void mSort(std::vector<int>& list, int start, int end);
+   size_t left(size_t i);
+   size_t right(size_t i);
 };

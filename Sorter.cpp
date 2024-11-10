@@ -144,12 +144,24 @@ void Sorter::mSort(std::vector<int>& list, int start, int end) {
 }
 
 
-void Sorter::heapSort(std::vector<int>& list) {
+size_t Sorter::left(size_t i) {
+  return (i * 2) + 1;
+}
+
+size_t Sorter::right(size_t i) {
+  return (i * 2) + 2;
+}
+
+std::vector<int>& Sorter::heapSort(std::vector<int>& list) {
   size_t i = list.size() / 2;
   size_t end = list.size();
   while (i >= 0) {
     heapifyDown(i, list, end);
+    for (auto num: list) {
+      std::cout << num << " ";
+    }
     i--;
+    std::cout << "\n";
   }
 
   int start = 0;
@@ -158,6 +170,8 @@ void Sorter::heapSort(std::vector<int>& list) {
     end--;
     heapifyDown(start, list, end);
   }
+
+  return list;
 }
 
 
@@ -186,8 +200,10 @@ void Sorter::heapifyDown(size_t i, std::vector<int>& list, size_t end) {
 int main() {
   Timer timer;
   std::vector<int> list = {4,8,7,9,6,5,2,1,5,7,9,6,5,2,1,5,6,5,2,1,5,7,9,4,7,9,4,4,5,7,9,3,6,6,5,2,1,5,7,9,4,5,44,2,1,5,4,9,8,7,6,5,4,8,4,6,5,7,9,8,5,4,8,4,5,7,77,66,4,8,7,9,6,5,2,1,5,7,9,6,5,2,1,5,6,5,2,1,5,7,9,4,7,9,4,4,5,7,9,3,6,6,5,2,1,5,7,9,4,5,44,2,1,5,4,9,8,7,6,5,4,8,4,6,5,7,9,8,5,4,8,4,5,7,77,66,4,8,7,9,6,5,2,1,5,7,9,6,5,2,1,5,6,5,2,1,5,7,9,4,7,9,4,4,5,7,9,3,6,6,5,2,1,5,7,9,4,5,44,2,1,5,4,9,8,7,6,5,4,8,4,6,5,7,9,8,5,4,8,4,5,7,77,66};
+  
   std::vector<int> list2 = list;
   Sorter sorter;
+  sorter.heapSort(list);
   int n = 10000;
   timer.startTimer();  
   for (int i = 0; i < n; i++) {
@@ -229,4 +245,11 @@ int main() {
   timer.stopTimer();
   std::cout << "SelectionSort - Elapsed Time: " << timer.time().count() << " ms\n";
   list = list2;
+  timer.startTimer();
+  for (int i = 0; i < n; i++) {
+    sorter.heapSort(list);
+    list = list2;
+  }
+  timer.stopTimer();
+  std::cout << "HeapSort - Elapsed Time: " << timer.time().count() << " ms\n";
 }
