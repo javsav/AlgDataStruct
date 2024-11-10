@@ -143,6 +143,46 @@ void Sorter::mSort(std::vector<int>& list, int start, int end) {
 
 }
 
+
+void Sorter::heapSort(std::vector<int>& list) {
+  size_t i = list.size() / 2;
+  size_t end = list.size();
+  while (i >= 0) {
+    heapifyDown(i, list, end);
+    i--;
+  }
+
+  int start = 0;
+  while (end > 1) {
+    std::swap(list[start], list[end - 1]);
+    end--;
+    heapifyDown(start, list, end);
+  }
+}
+
+
+void Sorter::heapifyDown(size_t i, std::vector<int>& list, size_t end) {
+  if (i >= end) {
+    return;
+  }
+
+  int max = i;
+
+  int l = left(i);
+  int r = right(i);
+
+  if (l < end && list[l] > list[max]) {
+    max = l;
+  }
+  if (r < end && list[r] > list[max]) {
+    max = r;
+  }
+  if (max != i) {
+    std::swap(list[i], list[max]);
+    heapifyDown(max, list, end);
+  }
+}
+
 int main() {
   Timer timer;
   std::vector<int> list = {4,8,7,9,6,5,2,1,5,7,9,6,5,2,1,5,6,5,2,1,5,7,9,4,7,9,4,4,5,7,9,3,6,6,5,2,1,5,7,9,4,5,44,2,1,5,4,9,8,7,6,5,4,8,4,6,5,7,9,8,5,4,8,4,5,7,77,66,4,8,7,9,6,5,2,1,5,7,9,6,5,2,1,5,6,5,2,1,5,7,9,4,7,9,4,4,5,7,9,3,6,6,5,2,1,5,7,9,4,5,44,2,1,5,4,9,8,7,6,5,4,8,4,6,5,7,9,8,5,4,8,4,5,7,77,66,4,8,7,9,6,5,2,1,5,7,9,6,5,2,1,5,6,5,2,1,5,7,9,4,7,9,4,4,5,7,9,3,6,6,5,2,1,5,7,9,4,5,44,2,1,5,4,9,8,7,6,5,4,8,4,6,5,7,9,8,5,4,8,4,5,7,77,66};
