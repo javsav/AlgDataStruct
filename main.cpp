@@ -1,43 +1,32 @@
-#include "LinkedList.h"
-
+#include "Heap.h"
+using namespace std;
 int main() {
-  
-
-  std::vector<int> list = {2,6,3,4,6,8,7,2,1,3,9};
-
-  LinkedList<int> llist(list);
-
-  
-
-  llist.print();
-
-  llist.push_front(3);
-
-  llist.print();
-
-  llist.deleteValue(4);
-
-  llist.print();
-
-  llist.deleteValue(3);
-
-  llist.print();
-
-  llist.deleteValue(9);
-
-  llist.print();
-
-  llist.printTail();
-
-  llist.printHead();
-
-  llist.insert(3, 12);
-
-  llist.print();
-
-  llist.push_back(69);
-
-  llist.print();
-
-  llist.printTail();
+  std::vector<int> list = {1,5,4,7,48,91,6,5,40,8,5,2,3,12,5,6,4,7,8,5,14,3,5};
+  Heap<int> heap(list, list.size() + 1);
+  heap.print();
+  heap.insert(15);
+  heap.print();
+  heap.insert(2);
+  heap.print();
+  heap.insert(33);
+  heap.print();
+  heap.insert(200);
+  heap.print();
+  heap.remove(8);
+  heap.print();
+  heap.remove(8);
+  heap.print();
+  heap.remove({3, 12, 5, 6, 4, 7, 8, 5, 14, 3, 5});
+  heap.print();
+  heap.insert(201);
+  heap.print();
+  heap.remove({1,5,4,7,48,91,6,5,40,});
+  heap.print();
+  heap.insert(3);
+  heap.print();
+  // heap.heapSort(list);
+  // for (auto num: list) {
+  //   std::cout << num << ' ';
+  // }
+  // std::cout << '\n';
 }
