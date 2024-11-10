@@ -34,7 +34,7 @@ std::vector<int>& Sorter::selectionSort(std::vector<int>& list) {
       if (list[right] < list[min]) {
         min = right;
       }
-    }    
+    }      
     std::swap(list[min], list[left]);
     left++;    
   }
@@ -42,15 +42,19 @@ std::vector<int>& Sorter::selectionSort(std::vector<int>& list) {
 }
 
 std::vector<int>& Sorter::bubbleSort(std::vector<int>& list) {
-  int right = list.size() - 1;
-
+  int right = list.size() - 1;  
   int left = 0;
 
   while (right > 0) {
+    bool swaps = false;
     for (int i = left; i < right; i++) {
       if (list[i] > list[i + 1]) {
         std::swap(list[i], list[i+1]);
+        swaps = true;
       }
+    }
+    if (!swaps) {
+      return list;
     }
     right--;
   }
