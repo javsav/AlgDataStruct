@@ -43,6 +43,16 @@ void RedBlackTree<T>::postOrderPrint(RBTNode<T>* node) {
 }
 
 template <typename T>
+RBTNode<T>* RedBlackTree<T>::smallestChild(RBTNode<T>* node) {
+  RBTNode<T>* current = node;
+
+  while (current->leftChild != nullptr) {
+    current = current->leftChild;
+  }
+  return current;
+}
+
+template <typename T>
 RedBlackTree<T>::RedBlackTree() {
   root = nullptr;
 }
@@ -57,7 +67,7 @@ RedBlackTree<T>::RedBlackTree(std::vector<int> list) {
   int mid = (end + start) / 2;
   int rMid = (mid + 1 + end) / 2;
   int lMid = (start + mid - 1) / 2;
-  //RBTNode* current = this->root;
+  
   root = new RBTNode<T>(list[mid]);
   m_size++;
   root->leftChild = new RBTNode<T>(list[lMid], root);
@@ -91,6 +101,26 @@ void RedBlackTree<T>::populate(RBTNode<T>* current, std::vector<int>& list, int 
   m_size++;
   populate(current->leftChild, list, start, mid - 1);
   populate(current->rightChild, list, mid + 1, end);
+}
+template <typename T>
+void RedBlackTree<T>::fixDelete(RBTNode<T>* node) {
+  RBTNode<T>* sibling = nullptr;
+  RBTNode<T>* current = node;
+
+  while (current != root && !current->isRed) {
+    if (current == current->parent->leftChild) {
+      sibling = current->parent->rightChild;
+      if (sibling->isRed) {
+        sibling->isRed = false;
+        leftRotate(current->parent);
+        sibling = current->parent->rightChild;
+      }
+      if ((!sibling->leftChild || !sibling->isRed) && (!sibling->rightChild || !sibling->rightChild->isRed)) {
+        sibling->isRed = true;
+        current = current->parent;
+      } else {}
+    }
+  }
 }
 template <typename T>
 void RedBlackTree<T>::printInOrder() {
@@ -207,21 +237,21 @@ void RedBlackTree<T>::printAsTree() {
             return;
           }
           std::cout << "" << std::setw(((o_size - (powTwo / 2)) / (pow(2, powTwo)))) << ' ';
-          o_size++;
+          //o_size++;
           std::cout << "" << std::setw(((o_size - (powTwo / 2)) / (pow(2, powTwo)))) << ' ';
-          o_size++;
+          //o_size++;
         } else if (nils.front() == 0) {
           if (nodes.empty()) {
             return;
           }
-          std::cout << "N" << std::setw(((o_size - (powTwo / 2)) / (pow(2, powTwo)))) << ' ';
-          o_size++;
-          std::cout << "N" << std::setw(((o_size - (powTwo / 2)) / (pow(2, powTwo)))) << ' ';
-          o_size++;
+          //std::cout << "" << std::setw(((o_size - (powTwo / 2)) / (pow(2, powTwo)))) << ' ';
+          //o_size++;
+          //std::cout << "" << std::setw(((o_size - (powTwo / 2)) / (pow(2, powTwo)))) << ' ';
+          //o_size++;
           if (nodes.front() == nullptr) {            
-            nodes.pop();
+            //nodes.pop();
             if (nodes.front() == nullptr) {
-              nodes.pop();
+              //nodes.pop();
             }
             nils.pop();
             continue;
@@ -272,16 +302,25 @@ void RedBlackTree<T>::insert(T key) {
     root = new RBTNode<T>(key);
     return;
   }
+
+  bool isLeft = false;
+
   RBTNode<T>* current = nullptr;
   RBTNode<T>* parent = nullptr;
   if (key > root->data) {
     current = root->rightChild;
   } else if (key < root->data) {
-    current = root->leftChild;
+    if (root->leftChild) {
+      current = root->leftChild;
+    } else {
+      isLeft = true;
+    }
+    
+    
   } else {    
     return;
   }
-  bool isLeft = false;
+  
   if (current) {
     while (current != nullptr) {
       if (key > current->data) {
@@ -305,23 +344,39 @@ void RedBlackTree<T>::insert(T key) {
         return;
       }
     }
+    current = new RBTNode<T>(key, parent, true);
+    m_size++;
+    if (isLeft) {
+      parent->leftChild = current;
+    } else {
+      parent->rightChild = current;
+    }
   } else {
     parent = root;
-  }
-  
-  current = new RBTNode<T>(key, parent, true);
-  m_size++;
-  if (isLeft) {
-    parent->leftChild = current;
-  } else {
-    parent->rightChild = current;
-  }
+    if (isLeft) {
+      root->leftChild = new RBTNode<T>(key, parent, true);
+      current = root->leftChild;
+    } else {
+      root->rightChild = new RBTNode<T>(key, parent, true);
+      current = root->rightChild;
+    }    
+    m_size++;
+  }  
   
   if (current->parent->parent == nullptr) {
     return;
   }
   
   fixInsert(current);
+}
+
+template <typename T>
+void RedBlackTree<T>::insert(std::initializer_list<T> keys) {
+  
+
+   for (auto i = keys.begin(); i != keys.end(); ++i) {
+    insert(*i);    
+  }
 }
 
 template <typename T>
@@ -419,6 +474,91 @@ void RedBlackTree<T>::fixInsert(RBTNode<T>* k) {
   }
   // Ensure that root is black
   root->isRed = false;
+}
+
+template <typename T>
+RBTNode<T>* RedBlackTree<T>::search(T value) {
+  RBTNode<T>* current = root;
+
+  while (current != nullptr) {
+    std::cout << current->data << "\n";
+    if (value > current->data) {
+      current = current->rightChild;
+    } else if (value < current->data) {
+      current = current->leftChild;
+    } else {     
+      return current;
+    }
+  }
+  
+  return nullptr;
+}
+
+template <typename T>
+void RedBlackTree<T>::remove(T value) {
+  RBTNode<T>* z = search(value);
+  RBTNode<T>* y = nullptr;
+  RBTNode<T>* x = nullptr;
+  
+  if (z == nullptr) {
+    return;
+  }
+  
+  bool wasRed = z->isRed;
+  
+  // delNode has no leftChild 
+  if (z->leftChild == nullptr) {
+    x = z->rightChild;    
+    transplant(z, x);
+   
+    // delNode has no rightChild
+  } else if (z->rightChild == nullptr) {
+    x = z->leftChild;
+    transplant(z, x);
+    // delNode has both children
+  } else {
+    // Set y as smallest node in right subtree of delNode
+    y = smallestChild(z->rightChild);
+    wasRed = y->isRed;
+    x = y->rightChild;
+    // If y is a child of delNode
+    if (y->parent == z) {
+      if (x != nullptr) {
+        x->parent = y;
+      }
+    // If y is not a child of delNode
+    } else {
+      transplant(y, y->rightChild);
+      y->rightChild = z->rightChild;
+      z->rightChild->parent = y;
+    }
+    transplant(z, y);
+    y->leftChild = z->leftChild;
+    z->leftChild->parent = y;
+    y->isRed = z->isRed;
+  }
+  delete z;
+  // If colour was black, call fixDelete
+  if (wasRed == false) {
+    //fix delete;
+  }
+
+
+}
+
+template <typename T>
+void RedBlackTree<T>::transplant(RBTNode<T>* recipient, RBTNode<T>* donor) {
+  
+  if (recipient->parent == nullptr) {
+    root = donor;
+  } else if (recipient == recipient->parent->leftChild) {
+    recipient->parent->leftChild = donor;
+  } else {
+    recipient->parent->rightChild = donor;
+  }
+  if (donor) {
+    donor->parent = recipient->parent;
+  }
 }
 
 template <typename T>
