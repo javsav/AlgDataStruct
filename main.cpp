@@ -1,46 +1,28 @@
-#include "RedBlackTree.h"
-#include "RedBlackTree.cpp"
-#include "RBTNode.h"
-#include "RBTNode.cpp"
+#include "Trie.h"
 
 #include <string>
 
 int main() {
-  std::vector<int> list = {1,2,4,5,6,7,8,9,10,11,12,13,14,15,16,17, 18, 19, 20, 21};
-  //RedBlackTree<NodeData<int, std::string>> tree;
-  RedBlackTree<int> tree;
-  tree.printAsTree();
-  std::cout << "\n\n";
-  tree.insert(34);
-  tree.printAsTree();
-  std::cout << "\n\n";
-  tree.insert(27);
-  tree.printAsTree();
-  std::cout << "\n\n";
-  tree.insert(1);
-  tree.printAsTree();
-  std::cout << "\n\n";
-  tree.insert(35);
-  tree.printAsTree();
-  std::cout << "\n\n"; //7,8,9,10,11,12,13,14
-  tree.insert({7, 8, 9, 10, 11, 12, 13, 14});
-  tree.printAsTree();
-  std::cout << "\n\n";
-  tree.printInOrder();
-  std::cout << "\n\n";
+
+  Trie<int> trie;
+  trie.insert("apple");
+  trie.insert("application");
+  trie.insert("applet");
+  trie.insert("beast");
+  trie.insert("beastiality");
+  trie.insert("z");
+
+  trie.printAll();
+
+  std::vector<std::string> words = trie.search("be");
+
+  for (auto word:words) {
+    std::cout << word << ' ';
+  }
+  std::cout << '\n';
+
+  std::cout << trie["sd"] << '\n';
   
-  tree.remove(12);
-  tree.printAsTree();
-  std::cout << "\n\n";
-  tree.remove(10);
-  tree.printAsTree();
-  std::cout << "\n\n";
-  tree.remove(7);
-  tree.printAsTree();
-  std::cout << "\n\n";
-  tree.remove(9);
-  tree.printAsTree();
-  std::cout << "\n\n";
   // std::string test = "a";
   // NodeData<int, std::string> datum(1, "aa");
   // tree.insert(datum);
