@@ -2,6 +2,41 @@
 
 #include <string>
 
+int fac(int n) {
+
+if (n <= 1) {
+return 1;
+}
+
+return n * fac(n - 1);
+}
+
+int fac2Helper(int n, int acc) {
+  if (n <= 1) {
+    return acc;
+  }
+
+  return fac2Helper(n - 1, n*acc);
+}
+
+int fac2(int n) {
+  return fac2Helper(n, 1);
+}
+
+int cumSumHelper(int n, int acc) {
+	
+	if (n == 0) {
+	return acc;
+	}
+	
+	return cumSumHelper(n-1,n+acc);
+	
+	}
+	
+	int cumSum(int n) {
+	return cumSumHelper(n, 0);
+}
+
 int main() {
 
   Trie<int> trie;
@@ -22,6 +57,10 @@ int main() {
   std::cout << '\n';
 
   std::cout << trie["sd"] << '\n';
+
+  std::cout << fac(5) << '\n';
+
+  std::cout << cumSum(4);
   
   // std::string test = "a";
   // NodeData<int, std::string> datum(1, "aa");
