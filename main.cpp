@@ -35,7 +35,12 @@ int main() {
   tree.remove(10);
   tree.printAsTree();
   std::cout << "\n\n";
-
+  tree.remove(7);
+  tree.printAsTree();
+  std::cout << "\n\n";
+  tree.remove(9);
+  tree.printAsTree();
+  std::cout << "\n\n";
   // std::string test = "a";
   // NodeData<int, std::string> datum(1, "aa");
   // tree.insert(datum);

@@ -112,15 +112,62 @@ void RedBlackTree<T>::fixDelete(RBTNode<T>* node) {
       sibling = current->parent->rightChild;
       if (sibling->isRed) {
         sibling->isRed = false;
+        current->parent->isRed = true;
         leftRotate(current->parent);
         sibling = current->parent->rightChild;
       }
-      if ((!sibling->leftChild || !sibling->isRed) && (!sibling->rightChild || !sibling->rightChild->isRed)) {
+      if ((!sibling->leftChild || !sibling->leftChild->isRed) && (!sibling->rightChild || !sibling->rightChild->isRed)) {
         sibling->isRed = true;
         current = current->parent;
-      } else {}
+      } else {
+        if ((!sibling->rightChild || !sibling->rightChild->isRed)) {
+          if (sibling->leftChild) {
+            sibling->leftChild->isRed = false;
+          }
+          sibling->isRed = true;
+          rightRotate(sibling);
+          sibling = current->parent->right;
+        }
+        sibling->isRed = current->parent->isRed;
+        current->parent->isRed = false;
+        if (sibling->rightChild) {
+          sibling->rightChild->isRed = false;
+        }
+        leftRotate(current->parent);
+        current = root;
+      }
+    } else {
+      sibling = current->parent->leftChild;
+      if (sibling->isRed) {
+        sibling->isRed = false;
+        current->parent->isRed = true;
+        rightRotate(current->parent);
+        sibling = current->parent->leftChild;
+      }
+      if ((!sibling->leftChild || !sibling->leftChild->isRed) &&
+          (!sibling->rightChild || !sibling->rightChild->isRed)) {
+        sibling->isRed = true;
+        current = current->parent;
+      } else {
+        if ((!sibling->leftChild || !sibling->rightChild->isRed)) {
+          if (sibling->rightChild) {
+            sibling->rightChild->isRed = false;
+          }
+          sibling->isRed = true;
+          leftRotate(sibling);
+          sibling = current->parent->left;
+        }
+        sibling->isRed = current->parent->isRed;
+        current->parent->isRed = false;
+        if (sibling->leftChild) {
+          sibling->leftChild->isRed = false;
+        }
+        rightRotate(current->parent);
+        current = root;
+      }
     }
   }
+  current->isRed = false;
 }
 template <typename T>
 void RedBlackTree<T>::printInOrder() {
@@ -261,16 +308,7 @@ void RedBlackTree<T>::printAsTree() {
             continue;
           }
           
-        }
-        // } else if (nils.front() == 2) {
-        //   if (current->leftChild != nullptr) {
-        //     //std::cout << current->leftChild->data << ((current->leftChild->isRed) ? "R" : "B") << std::setw(((m_size - (powTwo / 2)) / (pow(2, powTwo)))) << ' ';
-        //   } else if (current->rightChild != nullptr) {
-        //     //std::cout << current->rightChild->data << ((current->leftChild->isRed) ? "R" : "B") << std::setw(((m_size - (powTwo / 2)) / (pow(2, powTwo)))) << ' ';
-        //   }
-          
-        // }
-        
+        }        
         nils.pop();
       }
     }
@@ -291,7 +329,7 @@ void RedBlackTree<T>::printAsTree() {
 
 }
 std::cout << '\n';
-
+std::cout << std::endl;
 }
 
 
@@ -480,8 +518,7 @@ template <typename T>
 RBTNode<T>* RedBlackTree<T>::search(T value) {
   RBTNode<T>* current = root;
 
-  while (current != nullptr) {
-    std::cout << current->data << "\n";
+  while (current != nullptr) {    
     if (value > current->data) {
       current = current->rightChild;
     } else if (value < current->data) {

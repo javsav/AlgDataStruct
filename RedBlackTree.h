@@ -38,10 +38,7 @@ class RedBlackTree {
   void insert(T key);
   void insert(std::initializer_list<T> keys);
   template <typename U>
-  void insert(T key, U data);
-  
- 
-  
+  void insert(T key, U data);  
   void remove(T value);
  
 };
