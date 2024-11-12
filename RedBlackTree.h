@@ -22,7 +22,7 @@ class RedBlackTree {
   RBTNode<T>* search(T value);
   void fixInsert(RBTNode<T>* k);
   void populate(RBTNode<T>* current, std::vector<int>& list, int start, int end);
-  void fixDelete(RBTNode<T>*& node);
+  void fixDelete(RBTNode<T>*& node, RBTNode<T>*& parent);
   size_t m_size = 0;
 
  public:

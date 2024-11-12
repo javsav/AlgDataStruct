@@ -5,17 +5,30 @@
 
 #include <string>
 
+
 int main() {
-  std::vector<int> list = {1,2,4,5,6,7,8,11,13};
+  std::vector<int> list = {-2, -3, -1, -5};
   //RedBlackTree<NodeData<int, std::string>> tree;
   RedBlackTree<int> tree;
 
   tree.insert({1,2,3,4,5,6,7,8,9,10,13});
   tree.printAsTree();
   std::cout << "\n\n";
+  tree.insert(14);
+  tree.printAsTree();
+  std::cout << "\n\n";
   tree.remove(3);
   tree.printAsTree();
   std::cout << "\n\n";
+  tree.remove(14);
+  tree.printAsTree();
+  std::cout << "\n\n";
+  tree.remove(8);
+  tree.printAsTree();
+  std::cout << "\n\n";
+
+
+}
 
   // std::string test = "a";
   // NodeData<int, std::string> datum(1, "aa");
@@ -42,7 +55,7 @@ int main() {
   // tree.insert(13);
   // std::cout << "\n";
   // tree.printAsTree();
-}
+   
 
 //                  11B
 //            6B       16B

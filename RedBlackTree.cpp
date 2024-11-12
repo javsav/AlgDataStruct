@@ -115,22 +115,28 @@ void RedBlackTree<T>::populate(RBTNode<T>* current, std::vector<int>& list,
   populate(current->rightChild, list, mid + 1, end);
 }
 template <typename T>
-void RedBlackTree<T>::fixDelete(RBTNode<T>*& node) {
+void RedBlackTree<T>::fixDelete(RBTNode<T>*& node, RBTNode<T>*& parent) {
   RBTNode<T>* sibling = nullptr;
   RBTNode<T>* current = node;
 
-  while (current != root && !current->isRed) {
-    if (current->parent != nullptr && current == current->parent->leftChild) {      
-      sibling = current->parent->rightChild;
+  while (current != root) {
+    if (current) {
+      if (current->isRed) {
+        break;
+      }
+    }
+    if (parent && (current == parent->leftChild)) {
+      sibling = parent->rightChild;
       if (sibling != nullptr && sibling->isRed) {
         sibling->isRed = false;
-        current->parent->isRed = true;
-        leftRotate(current->parent);
-        sibling = current->parent->rightChild;
+        parent->isRed = true;
+        leftRotate(parent);
+        sibling = parent->rightChild;
       }
       if (sibling != nullptr && (!sibling->leftChild || !sibling->leftChild->isRed) && (!sibling->rightChild || !sibling->rightChild->isRed)) {
         sibling->isRed = true;
-        current = current->parent;
+        current = parent;
+        parent = current->parent;
       } else {
         if (sibling != nullptr && (!sibling->rightChild || !sibling->rightChild->isRed)) {
           if (sibling->leftChild) {
@@ -138,33 +144,34 @@ void RedBlackTree<T>::fixDelete(RBTNode<T>*& node) {
           }
           sibling->isRed = true;
           rightRotate(sibling);
-          if (current->parent) {
-          sibling = current->parent->rightChild;
+          if (parent) {
+          sibling = parent->rightChild;
           }
         }
-        if (current->parent) {
-        sibling->isRed = current->parent->isRed;
-        current->parent->isRed = false;
+        if (parent) {
+        sibling->isRed = parent->isRed;
+        parent->isRed = false;
         }
         if (sibling && sibling->rightChild) {
           sibling->rightChild->isRed = false;
         }
-        leftRotate(current->parent);
+        leftRotate(parent);
         current = root;
+        parent = nullptr;
       }
-    } else if (current->parent) {
-      
-      sibling = current->parent->leftChild;
+    } else if (parent) {
+      sibling = parent->leftChild;
       if (sibling != nullptr && sibling->isRed) {
         sibling->isRed = false;
-        current->parent->isRed = true;
-        rightRotate(current->parent);
-        sibling = current->parent->leftChild;
+        parent->isRed = true;
+        rightRotate(parent);
+        sibling = parent->leftChild;
       }
       if (sibling && (!sibling->leftChild || !sibling->leftChild->isRed) &&
-          (!sibling->rightChild || !sibling->rightChild->isRed)) {
+          (!sibling->rightChild || !sibling->rightChild->isRed)) {        
         sibling->isRed = true;
-        current = current->parent;
+        current = parent;
+        parent = parent->parent;
       } else {
         if (sibling && (!sibling->leftChild || !sibling->rightChild->isRed)) {
           if (sibling->rightChild) {
@@ -172,16 +179,17 @@ void RedBlackTree<T>::fixDelete(RBTNode<T>*& node) {
           }
           sibling->isRed = true;
           leftRotate(sibling);
-          sibling = current->parent->leftChild;
+          sibling = parent->leftChild;
         }
-        sibling->isRed = current->parent->isRed;
-        current->parent->isRed = false;
+        sibling->isRed = parent->isRed;
+        parent->isRed = false;
         if (sibling && sibling->leftChild) {
           sibling->leftChild->isRed = false;
         }
-        rightRotate(current->parent);
+        rightRotate(parent);
         current = root;
-      }
+        parent = nullptr;
+      }      
     }
   }
   if (current) {
@@ -263,7 +271,7 @@ void RedBlackTree<T>::printAsTree() {
     while (nodes.front() == nullptr) {
       hasNils = true;
       std::cout << "N" << std::setw(((o_size - (powTwo / 2)) / (pow(2, powTwo)))) << ' ';
-      //index++;      
+      index++;      
       nils.push(true);
       nodes.pop();
       if (!nodes.empty()) {
@@ -304,9 +312,9 @@ void RedBlackTree<T>::printAsTree() {
             return;
           }
           std::cout << "" << std::setw(((o_size - (powTwo / 2)) / (pow(2, powTwo)))) << ' ';
-          //o_size++;
+          index++;
           std::cout << "" << std::setw(((o_size - (powTwo / 2)) / (pow(2, powTwo)))) << ' ';
-          //o_size++;
+          index++;
         } else if (nils.front() == 0) {
           if (nodes.empty()) {
             return;
@@ -372,13 +380,11 @@ void RedBlackTree<T>::insert(T key) {
       current = root->leftChild;
     } else {
       isLeft = true;
-    }
-    
+    }   
     
   } else {    
     return;
-  }
-  
+  }  
   if (current) {
     while (current != nullptr) {
       if (key > current->data) {
@@ -556,21 +562,30 @@ void RedBlackTree<T>::remove(T value) {
   RBTNode<T>* z = search(value);
   RBTNode<T>* y = nullptr;
   RBTNode<T>* x = nullptr;
+  RBTNode<T>* parent = nullptr;
   
   if (z == nullptr) {
     return;
   }
+  bool wasRed;
   y = z;
-  bool wasRed = y->isRed;
+  if (y) {
+    wasRed = y->isRed;
+  } else {
+    wasRed = false;
+  }
+  
   
   // delNode has no leftChild 
   if (z->leftChild == nullptr) {
-    x = z->rightChild;    
+    x = z->rightChild;
+    parent = z->parent;    
     transplant(z, z->rightChild);
    
     // delNode has no rightChild
   } else if (z->rightChild == nullptr) {
     x = z->leftChild;
+    parent = z->parent;
     transplant(z, z->leftChild);
     // delNode has both children
   } else {
@@ -578,6 +593,7 @@ void RedBlackTree<T>::remove(T value) {
     y = smallestChild(z->rightChild);
     wasRed = y->isRed;
     x = y->rightChild;
+    parent = y->parent;
     // If y is a child of delNode
     if (y->parent == z) {
       if (x != nullptr) {
@@ -597,7 +613,7 @@ void RedBlackTree<T>::remove(T value) {
   delete z;
   // If colour was black, call fixDelete
   if (wasRed == false) {
-    fixDelete(x);
+    fixDelete(x, parent);
   }
 
 
@@ -618,9 +634,7 @@ void RedBlackTree<T>::transplant(RBTNode<T>* recipient, RBTNode<T>* donor) {
   }
 }
 
-template <typename T>
-template <typename U>
-inline void RedBlackTree<T>::insert(T key, U data) {}
+
 
 #endif
 
