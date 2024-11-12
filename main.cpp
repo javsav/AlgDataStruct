@@ -6,41 +6,17 @@
 #include <string>
 
 int main() {
-  std::vector<int> list = {1,2,4,5,6,7,8,9,10,11,12,13,14,15,16,17, 18, 19, 20, 21};
+  std::vector<int> list = {1,2,4,5,6,7,8,11,13};
   //RedBlackTree<NodeData<int, std::string>> tree;
   RedBlackTree<int> tree;
+
+  tree.insert({1,2,3,4,5,6,7,8,9,10,13});
   tree.printAsTree();
   std::cout << "\n\n";
-  tree.insert(34);
+  tree.remove(3);
   tree.printAsTree();
   std::cout << "\n\n";
-  tree.insert(27);
-  tree.printAsTree();
-  std::cout << "\n\n";
-  tree.insert(1);
-  tree.printAsTree();
-  std::cout << "\n\n";
-  tree.insert(35);
-  tree.printAsTree();
-  std::cout << "\n\n"; //7,8,9,10,11,12,13,14
-  tree.insert({7, 8, 9, 10, 11, 12, 13, 14});
-  tree.printAsTree();
-  std::cout << "\n\n";
-  tree.printInOrder();
-  std::cout << "\n\n";
-  
-  tree.remove(12);
-  tree.printAsTree();
-  std::cout << "\n\n";
-  tree.remove(10);
-  tree.printAsTree();
-  std::cout << "\n\n";
-  tree.remove(7);
-  tree.printAsTree();
-  std::cout << "\n\n";
-  tree.remove(9);
-  tree.printAsTree();
-  std::cout << "\n\n";
+
   // std::string test = "a";
   // NodeData<int, std::string> datum(1, "aa");
   // tree.insert(datum);

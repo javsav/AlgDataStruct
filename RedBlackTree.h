@@ -22,14 +22,15 @@ class RedBlackTree {
   RBTNode<T>* search(T value);
   void fixInsert(RBTNode<T>* k);
   void populate(RBTNode<T>* current, std::vector<int>& list, int start, int end);
-  void fixDelete(RBTNode<T>* node);
+  void fixDelete(RBTNode<T>*& node);
   size_t m_size = 0;
 
  public:
   size_t size() {return this->m_size;}
   RedBlackTree();
   RedBlackTree(std::vector<int> list);
-  
+  void leftRotateValue(T value);
+  void rightRotateValue(T value);
   void printInOrder();
   void printPreOrder();
   void printPostOrder();
