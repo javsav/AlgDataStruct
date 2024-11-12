@@ -40,7 +40,7 @@ inline void Trie<T>::printer(TrieNode<T>* node, std::string& cur) {
 }
 
 template<typename T>
-inline void Trie<T>::searcher(TrieNode<T>* node, std::string& cur, std::vector<std::string>& res)
+void Trie<T>::searcher(TrieNode<T>* node, std::string& cur, std::vector<std::string>& res)
 {
   if (node->data != std::numeric_limits<T>::min()) {
     res.push_back(cur);
@@ -60,7 +60,7 @@ inline Trie<T>::Trie() {
 }
 
 template <typename T>
-inline void Trie<T>::insert(std::string word) {
+void Trie<T>::insert(std::string word) {
   int n = word.size();
   int i = 0;
   TrieNode<T>* current = root;
@@ -97,7 +97,7 @@ inline void Trie<T>::printAll() {
 }
 
 template <typename T>
-inline std::vector<std::string> Trie<T>::search(const char* chs) {
+std::vector<std::string> Trie<T>::search(const char* chs) {
   int i = 0;
   std::vector<std::string> res;
   TrieNode<T>* current = root;
