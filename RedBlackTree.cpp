@@ -90,8 +90,7 @@ void RedBlackTree<T>::rightRotateValue(T value) {
   std::cout << "\nTREE IS NOW INVALID\n\n";
 }
 template <typename T>
-void RedBlackTree<T>::populate(RBTNode<T>* current, std::vector<int>& list,
-                               int start, int end) {
+void RedBlackTree<T>::populate(RBTNode<T>* current, std::vector<int>& list, int start, int end) {
   if (start >= end) {
     return;
   }
