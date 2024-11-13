@@ -11,6 +11,7 @@ std::vector<int> CountingSort::cSort(std::vector<int>& list, int counts[], int m
       counts[list[i] - min]--;
     }
   }
+  
   return sortedList;
 }
 
@@ -32,13 +33,17 @@ std::vector<int> CountingSort::countingSort(std::vector<int>& list, int min, int
 }
 
 int main() {
-  CountingSort c;
+  CountingSort cd;
   std::vector<int> list = {4,5,8,7,4,6,9,8,4,5};
-  std::vector<int> newList = c.countingSort(list, 4, 9);
+  std::vector<int> newList = cd.countingSort(list, 4, 9);
 
-  for (auto num:newList) {
-    std::cout << num << ' ';
-  }
-  std::cout << '\n';
+int r = 5;
+int c = 5;
+float** matrix = new float*[r];
+for (int i = 0; i < r; i++) {
+  
+  matrix[i] = new float[c];
+}
+
 }
 
