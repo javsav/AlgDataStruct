@@ -1,31 +1,42 @@
-#include "RedBlackTree.h"
-#include "RedBlackTree.cpp"
-#include "RBTNode.h"
-#include "RBTNode.cpp"
+#include "Map.h"
+#include "Map.cpp"
+#include "MapNode.h"
+#include "MapNode.cpp"
 
 #include <string>
 
 
 int main() {
-  std::vector<int> list = {-2, -3, -1, -5};
-  //RedBlackTree<NodeData<int, std::string>> tree;
-  RedBlackTree<int> tree;
 
-  tree.insert({1,2,3,4,5,6,7,8,9,10,13});
-  tree.printAsTree();
-  std::cout << "\n\n";
-  tree.insert(14);
-  tree.printAsTree();
-  std::cout << "\n\n";
-  tree.remove(3);
-  tree.printAsTree();
-  std::cout << "\n\n";
-  tree.remove(14);
-  tree.printAsTree();
-  std::cout << "\n\n";
-  tree.remove(8);
-  tree.printAsTree();
-  std::cout << "\n\n";
+  Map<std::string, int> lemap;
+
+  lemap.insert("aids",2);
+  lemap.insert("boo", 7);
+  lemap.insert("anus", 1);
+
+  lemap.printAsTree();
+
+  std::cout << lemap.find("boo") << "\n";
+
+  // std::vector<int> list = {-2, -3, -1, -5};
+  // //RedBlackTree<NodeData<int, std::string>> tree;
+  // RedBlackTree<int> tree;
+
+  // tree.insert({1,2,3,4,5,6,7,8,9,10,13});
+  // tree.printAsTree();
+  // std::cout << "\n\n";
+  // tree.insert(14);
+  // tree.printAsTree();
+  // std::cout << "\n\n";
+  // tree.remove(3);
+  // tree.printAsTree();
+  // std::cout << "\n\n";
+  // tree.remove(14);
+  // tree.printAsTree();
+  // std::cout << "\n\n";
+  // tree.remove(8);
+  // tree.printAsTree();
+  // std::cout << "\n\n";
 
 
 }
