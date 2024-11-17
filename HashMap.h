@@ -40,8 +40,7 @@ class HashMap {
   }
 
   void insert(T key, U data) {
-    size_t hash = Hash<T>::hash(key, capacity);
-    std::cout << table[hash].full << '\n';
+    size_t hash = Hash<T>::hash(key, capacity);    
     if (table[hash].full) {
       int powTwo = 2;
       hash = hash + 1;
@@ -56,11 +55,16 @@ class HashMap {
   }
 
   void hash(T key);
+  void printIfFull() {
+    for (int i = 0; i < capacity; i++) {
+      std::cout << table[i].full << "\n";
+    }
+  }
      
   
 
   void printKeys() {
-    for (int i = 0; i < m_size; i++) {
+    for (int i = 0; i < capacity; i++) {
       if (table[i].full){
         std::cout << table[i].key << '\n';
       }

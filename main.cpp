@@ -11,7 +11,6 @@ int main() {
   }
   
   hmap.printKeys();
- 
   
   // Bucket<std::string, int>* table;
   // Bucket<std::string, int> buckets[30] {{}};
