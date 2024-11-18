@@ -20,7 +20,7 @@ class HashMap {
 
  private:  
   int m_size = 0;
-  int capacity = 30;
+  int capacity = 60;
   Bucket<T, U>* table;  
 
  public:
@@ -31,23 +31,90 @@ class HashMap {
     }
   }
 
+  inline void rehash(T key, U data, Bucket<T, U>* newTable) {
+    size_t hash = Hash<T>::hash(key, capacity);
+    if (newTable[hash].full) {
+      hash = hash + 1;
+      while (newTable[hash].full) {
+        hash += 1;
+        // Bounds checking **
+      }
+    }
+    newTable[hash] = Bucket<T, U>(key, data);    
+  }
+
+  U search(T key) {
+    size_t hash = Hash<T>::hash(key, capacity);
+    if (table[hash].full) {
+      if (table[hash].key == key) {        
+        return table[hash].data;
+      } else {
+        hash++;
+        while (table[hash].full) {
+          if (table[hash].key == key) {
+            return table[hash].data;
+          } else {
+            hash++;
+          }
+        }
+      }
+    } else {      
+      return U();
+    }
+    return U();
+  }
+
+  void remove(T key) {
+    size_t hash = Hash<T>::hash(key, capacity);
+    if (table[hash].full) {
+      if (table[hash].key == key) {
+        table[hash].deletedKey = key;
+        table[hash].full = false;
+        return;
+      } else {
+        hash++;
+        while (table[hash].full) {
+          if (table[hash].key == key) {
+            table[hash].deletedKey = key;
+            table[hash].full = false;
+            return;
+          } else {
+            hash++;
+          }
+      }
+    }
+  } else {
+    return;
+  }
+
+  }
+
   void resize() {
     Bucket<T, U>* newTable = new Bucket<T, U>[capacity * 2];    
-    std::copy(table, table+capacity, newTable);
+    for (int i = 0; i < capacity; i++) {
+      if (table[i].full) {
+        rehash(table[i].key, table[i].data, newTable);
+      }
+    }
     delete[] table;
     capacity *= 2;
     table = newTable;   
   }
 
   void insert(T key, U data) {
+    double load = (double)m_size / (double)capacity;
+    if (load >= 0.7) {
+      resize();
+    }
     size_t hash = Hash<T>::hash(key, capacity);    
-    if (table[hash].full) {
-      int powTwo = 2;
+    if (table[hash].full) {      
       hash = hash + 1;
       while (table[hash].full) {
-        hash += powTwo;
-        std::cout << hash << '\n';
-        powTwo * 2;
+        hash += 1;
+        if (hash >= capacity) {
+          resize();
+          return insert(key, data);
+        }        
       }
     }
     table[hash] = Bucket<T,U>(key, data);
@@ -84,13 +151,13 @@ class HashMap {
 template <>
 inline size_t Hash<std::string>::hash(std::string key, int modulus) {
   size_t hash = 1;
-  int m = modulus - 8;
-  int base = 13;
+  int base = 53;
+  int m = modulus * 0.7;
   int power = 1;
   for (int i = 0; i < key.size(); i++) {
-    hash = (hash * key[i]);
-    hash = (hash * power) % modulus;
-    power *= base;
+    hash = (hash * key[i] - 'a' + 1);
+    hash = (hash * power) % m;
+    power = (power * base) % m;
   }
   return hash;
 

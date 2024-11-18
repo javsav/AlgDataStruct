@@ -3,14 +3,13 @@
 
 int main() {
   HashMap<std::string, int> hmap;
-  std::string temp = "a";
-  for (int i = 0; i < 10; i++) {
-   temp += i + 'a';
-   hmap.insert(temp, i);
-   temp.pop_back();
-  }
+  hmap.insert("fig", 12);
+  hmap.insert("pussy", 69);
+  hmap.insert("anus", 100);
   
   hmap.printKeys();
+  std::cout << hmap.size() << "\n";
+  std::cout << hmap.search("pussy") << "\n";
   
   // Bucket<std::string, int>* table;
   // Bucket<std::string, int> buckets[30] {{}};
