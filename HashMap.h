@@ -20,7 +20,7 @@ class HashMap {
 
  private:  
   int m_size = 0;
-  int capacity = 60;
+  int capacity = 250;
   Bucket<T, U>* table;  
 
  public:
@@ -32,7 +32,7 @@ class HashMap {
   }
 
   inline void rehash(T key, U data, Bucket<T, U>* newTable) {
-    size_t hash = Hash<T>::hash(key, capacity);
+    size_t hash = Hash<T>::hash(key, capacity * 2);
     if (newTable[hash].full) {
       hash = hash + 1;
       while (newTable[hash].full) {
